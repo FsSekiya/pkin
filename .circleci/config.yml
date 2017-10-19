@@ -20,3 +20,5 @@ jobs:
           key: gemfile-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+      - run: bundle exec rubocop
+      - run: bundle exec brakeman -5 -A -w 1 -e -z
