@@ -13,10 +13,10 @@ jobs:
       - checkout
       - run: apt-get update -qq && apt-get install -y build-essential nodejs
       - restore_cache:
-        keys:
-          - gemfile-{{ checksum "Gemfile.lock" }}
+          keys:
+            - gemfile-{{ checksum "Gemfile.lock" }}
       - run: bundle install --jobs=4 --path=vendor/bundle --without production
       - save_cache:
-        key: gemfile-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
+          key: gemfile-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
