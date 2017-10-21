@@ -1,5 +1,7 @@
 {
   "name": "p_kintai",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "admin-lte": "^2.4.2"
+  }
 }
