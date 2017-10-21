@@ -14,9 +14,6 @@ jobs:
     working_directory: ~/p_kintai
     steps:
       - checkout
-      - run: export ja_JP.UTF-8
-      - run: export ja_JP.UTF-8
-      - run: export $LC_ALL
       - run: apt-get update -qq && apt-get install -y build-essential nodejs
       - restore_cache:
           keys:
