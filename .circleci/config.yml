@@ -5,12 +5,17 @@ jobs:
       - image: ruby:2.4.2
       - image: library/mysql:latest
         env:
-          - MYSQL_ALLOW_EMPTY_PASSWORD=true
-      - image: redis
+          - MYSQL_ALLOW_EMPTY_PASSWORD: true
+          - LANG: ja_JP.UTF-8
+          - LC_ALL: C.UTF-8
+          - LANGUAGE: ja_JP.UTF-8
 
-    working_directory: ~/p_kintai
+  working_directory: ~/p_kintai
     steps:
       - checkout
+      - run: export ja_JP.UTF-8
+      - run: export ja_JP.UTF-8
+      - run: export $LC_ALL
       - run: apt-get update -qq && apt-get install -y build-essential nodejs
       - restore_cache:
           keys:
