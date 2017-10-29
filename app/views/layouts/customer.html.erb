@@ -16,9 +16,10 @@
     <div class="wrapper" style="height: auto; min-height: 100%;">
       <%= render partial: 'customer/shared/header' %>
       <%= render partial: 'customer/shared/aside' %>
-      <%= yield %>
+      <div class="content-wrapper" style="min-height: 960px;">
+        <%= yield %>
+      </div>
       <%= render partial: 'customer/shared/footer' %>
-      <%= render partial: 'customer/shared/rside' %>
     </div>
   </body>
 </html>
