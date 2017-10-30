@@ -8,12 +8,12 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <%= stylesheet_link_tag 'customer', media: 'all' %>
-    <%= javascript_include_tag 'customer' %>
+    <%= javascript_pack_tag 'customer' %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   </head>
   <body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
-    <div class="wrapper" style="height: auto; min-height: 100%;">
+    <div class="wrapper" style="height: auto; min-height: 100%;" id="customer-main">
       <%= render partial: 'customer/shared/header' %>
       <%= render partial: 'customer/shared/aside' %>
       <div class="content-wrapper" style="min-height: 960px;">

@@ -18,4 +18,4 @@
 @import 'admin-lte/dist/css/skins/skin-blue';
 @import 'admin-lte/plugins/iCheck/all';
 
-@import 'trump';
+@import '_trump';

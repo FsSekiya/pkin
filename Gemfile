@@ -12,8 +12,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.5'
 gem 'autoprefixer-rails'
+gem 'webpacker'
 
-gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
 
 # トークンベースの認証を行うためのgem
@@ -25,6 +25,7 @@ gem 'rack-cors'
 
 group :development, :test do
   gem 'better_errors'
+  gem 'foreman'
   gem 'binding_of_caller'
   gem 'brakeman', require: false
   gem 'byebug', platform: :mri
@@ -32,6 +33,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rails-erd'
   gem 'rubocop'
+  gem 'selenium-webdriver'
 end
 
 group :development do
