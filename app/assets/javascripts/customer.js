@@ -11,10 +11,7 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require_tree .
 //= require jquery/dist/jquery
+//= require admin-lte/plugins/iCheck/icheck
 //= require bootstrap/dist/js/bootstrap
 //= require admin-lte/dist/js/adminlte
-//= require admin-lte/dist/js/demo
-//= require admin-lte/dist/js/pages/dashboard2
-//= require admin-lte/plugins/iCheck/icheck
