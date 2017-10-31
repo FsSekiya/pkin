@@ -19,6 +19,7 @@ gem 'simple_form'
 # トークンベースの認証を行うためのgem
 gem 'devise'
 gem 'devise_token_auth'
+gem 'omniauth'
 
 # クロスドメイン対策のgem
 gem 'rack-cors'
