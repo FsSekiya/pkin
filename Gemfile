@@ -16,6 +16,13 @@ gem 'autoprefixer-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
 
+# トークンベースの認証を行うためのgem
+gem 'devise'
+gem 'devise_token_auth'
+
+# クロスドメイン対策のgem
+gem 'rack-cors'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
