@@ -202,3 +202,6 @@ jspm_packages
 .node_repl_history
 
 
+/public/packs
+/public/packs-test
+/node_modules

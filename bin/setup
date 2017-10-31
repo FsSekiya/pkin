@@ -27,6 +27,9 @@ chdir APP_ROOT do
   #   cp 'config/database.yml.sample', 'config/database.yml'
   # end
 
+  puts "\n== yarn install =="
+  system! 'yarn install'
+
   puts "\n== Preparing database =="
   system! 'bin/rails db:setup'
 

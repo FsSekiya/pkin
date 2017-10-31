@@ -9,5 +9,5 @@
 
 ```
 $ bin/setup
-$ bundle exec rails s
+$ bundle exec foreman start
 ```

@@ -2,6 +2,14 @@
   "name": "p_kintai",
   "private": true,
   "dependencies": {
-    "admin-lte": "^2.4.2"
+    "@rails/webpacker": "^3.0.2",
+    "admin-lte": "^2.4.2",
+    "coffeescript": "1.12.7",
+    "vue": "^2.5.2",
+    "vue-loader": "^13.3.0",
+    "vue-template-compiler": "^2.5.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.9.3"
   }
 }
