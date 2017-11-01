@@ -33,3 +33,15 @@ $padding-base: 5;
     padding: #{$i * $padding-base}px !important;
   }
 }
+
+$width-base: 10;
+
+@for $i from 1 through 20 {
+  .w#{$i * $width-base} {
+    width: #{$i * $width-base}px !important;
+  }
+}
+
+.c-p {
+  cursor: pointer;
+}
