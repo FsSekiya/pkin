@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :customer, controllers: {
     sessions: 'customer/sessions'
-  }
+  }, skip: [:registration, :passwords]
   devise_scope :customer do
     root to: 'customer/sessions#new'
   end
