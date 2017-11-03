@@ -45,12 +45,12 @@ AllCops:
     - tmp/**/*
     - assets/**/*
     - lib/tasks/adhoc/*
-    - config/**/*
     - coverage/**/*
     - node_modules/**/*
     - app/inputs/image_preview_input.rb
     - Gemfile
     - spec/**/*
+    - config/initializers/*
 
 Metrics/CyclomaticComplexity:
   Max: 10
