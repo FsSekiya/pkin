@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     resources :dashboard
     resources :branch, only: %i[index show]
     resources :setting, only: [:index]
+    resources :record, only: [:index]
   end
 end

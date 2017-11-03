@@ -27,7 +27,7 @@
           </li>
         </ul>
       </li>
-      <li class="treeview">
+      <li class="treeview <%= 'active menu-open' if controller_name == 'record' %>">
         <a href="#">
           <i class="fa fa-file"></i>
           <span>RECORD</span>
@@ -37,22 +37,10 @@
         </a>
         <ul class="treeview-menu">
           <li class="active">
-            <a href="index2.html">
+            <%= link_to customer_record_index_path do %>
               <i class="fa fa-circle-o"></i>
               全店舗
-            </a>
-          </li>
-          <li class="active">
-            <a href="index2.html">
-              <i class="fa fa-circle-o"></i>
-              新宿店
-            </a>
-          </li>
-          <li class="active">
-            <a href="index2.html">
-              <i class="fa fa-circle-o"></i>
-              渋谷店
-            </a>
+            <% end %>
           </li>
         </ul>
       </li>
