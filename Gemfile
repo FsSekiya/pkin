@@ -24,6 +24,7 @@ gem 'devise-bootstrap-views'
 
 # クロスドメイン対策のgem
 gem 'rack-cors'
+gem 'email_validator'
 
 group :development, :test do
   gem 'better_errors'

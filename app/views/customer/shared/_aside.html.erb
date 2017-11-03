@@ -6,42 +6,30 @@
       </div>
       <div class="pull-left info">
         <p>Alexander Pierce</p>
-        <a href="#"><i class="fa fa-circle text-success"></i>カウンティア株式会社</a>
+        <div><i class="fa fa-circle text-success"></i>カウンティア株式会社</div>
       </div>
     </div>
     <ul class="sidebar-menu tree" data-widget="tree">
       <li class="header">選択してください</li>
-      <li class="active treeview menu-open">
+      <li class="treeview <%= 'active menu-open' if controller_name == 'branch' %>">
         <a href="#">
-          <i class="fa fa-dashboard"></i> <span>WORKER</span>
+          <i class="fa fa-male"></i> <span>WORKER</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="index.html">
+            <%= link_to customer_branch_index_path do %>
               <i class="fa fa-circle-o"></i>
               全店舗
-            </a>
-          </li>
-          <li class="">
-            <a href="index2.html">
-              <i class="fa fa-circle-o"></i>
-              新宿店
-            </a>
-          </li>
-          <li class="active">
-            <a href="index2.html">
-              <i class="fa fa-circle-o"></i>
-              渋谷店
-            </a>
+            <% end %>
           </li>
         </ul>
       </li>
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-files-o"></i>
+          <i class="fa fa-file"></i>
           <span>RECORD</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -69,10 +57,10 @@
         </ul>
       </li>
       <li>
-        <a href="#">
-          <i class="fa fa-files-o"></i>
+        <%= link_to customer_setting_index_path do %>
+          <i class="fa fa-cog"></i>
           <span>SETTING</span>
-        </a>
+        <% end %>
       </li>
     </ul>
   </section>

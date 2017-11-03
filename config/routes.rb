@@ -4,12 +4,14 @@ Rails.application.routes.draw do
 
   devise_for :customer, controllers: {
     sessions: 'customer/sessions'
-  }, skip: [:registration, :passwords]
+  }, skip: %i[registration passwords]
   devise_scope :customer do
     root to: 'customer/sessions#new'
   end
 
   namespace :customer do
     resources :dashboard
+    resources :branch, only: %i[index show]
+    resources :setting, only: [:index]
   end
 end

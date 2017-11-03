@@ -1,8 +1,8 @@
 <header class="main-header">
-  <a href="index2.html" class="logo">
+  <%= link_to customer_dashboard_index_path, class: 'logo' do %>
     <span class="logo-mini"><b>A</b>LT</span>
     <span class="logo-lg"><b>Admin</b>LTE</span>
-  </a>
+  <% end %>
   <nav class="navbar navbar-static-top">
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
       <span class="sr-only">Toggle navigation</span>
@@ -40,7 +40,7 @@
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <%= link_to 'Sign out', destroy_customer_session_path, method: 'delete', class: 'btn btn-default btn-flat' %>
               </div>
             </li>
           </ul>
