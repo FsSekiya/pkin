@@ -11,3 +11,8 @@
 $ bin/setup
 $ bundle exec foreman start
 ```
+
+Running test with following commnad
+```
+$ yarn test
+```

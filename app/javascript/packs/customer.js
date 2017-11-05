@@ -11,7 +11,7 @@ import Vue from 'vue/dist/vue.esm'
 import MemberAccordion from './components/member-accordion.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({
+  new Vue({
     el: '#customer-main',
     data: {
       message: "Can you say hello?"

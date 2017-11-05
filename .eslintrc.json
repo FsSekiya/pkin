@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/recommended"
+  ],
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "plugins": [
+    "mocha"
+  ],
+  "globals": {
+    "expect": true
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "rules": {
+    "vue/valid-v-if": "error"
+  }
+}

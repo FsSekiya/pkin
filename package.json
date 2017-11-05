@@ -1,16 +1,33 @@
 {
   "name": "p_kintai",
   "private": true,
+  "scripts": {
+    "test": "NODE_ENV=test ./node_modules/mocha-webpack/bin/mocha-webpack --webpack-config ./config/webpack/test.js --require ./app/javascript/packs/tests/setup.js ./app/javascript/packs/tests/**/*.test.js --recursive",
+    "htmlhint": "htmlhint --config .htmlhintrc app/javascript/packs/**/*",
+    "eslint": "eslint -c .eslintrc.json app/javascript/packs/**/*"
+  },
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
     "admin-lte": "^2.4.2",
     "axios": "^0.17.0",
-    "coffeescript": "1.12.7",
+    "babel-eslint": "^8.0.1",
+    "eslint": "^4.10.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-plugin-vue": "^3.13.1",
+    "htmlhint": "^0.9.13",
     "vue": "^2.5.2",
+    "vue-eslint-parser": "^2.0.1-beta.1",
     "vue-loader": "^13.3.0",
     "vue-template-compiler": "^2.5.2"
   },
   "devDependencies": {
-    "webpack-dev-server": "^2.9.3"
+    "expect": "^21.2.1",
+    "jsdom": "^11.3.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^4.0.1",
+    "mocha-webpack": "^1.0.1",
+    "vue-test-utils": "^1.0.0-beta.4",
+    "webpack-dev-server": "^2.9.3",
+    "webpack-merge": "^4.1.1"
   }
 }

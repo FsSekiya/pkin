@@ -1,3 +1,8 @@
 const environment = require('./environment')
+const merge = require('webpack-merge')
 
-module.exports = environment.toWebpackConfig()
+const configs = {
+  
+}
+
+module.exports = merge(environment.toWebpackConfig(), configs)

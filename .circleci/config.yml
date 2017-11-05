@@ -1,27 +1,41 @@
+default: &default
+  working_directory: ~/p_kintai
+  docker:
+    - image: circleci/ruby:2.4.1-node-browsers
+      environment:
+        TZ: /usr/share/zoneinfo/Asia/Tokyo
+        RAILS_ENV: test
+        LANG: ja_JP.UTF-8
+        LC_ALL: C.UTF-8
+        LANGUAGE: ja_JP.UTF-8
+    - image: library/mysql:latest
+      environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: true
+
 version: 2
 jobs:
   build:
-    docker:
-      - image: ruby:2.4.2
-        env:
-          - LANG: ja_JP.UTF-8
-          - LC_ALL: C.UTF-8
-          - LANGUAGE: ja_JP.UTF-8
-      - image: library/mysql:latest
-        env:
-          - MYSQL_ALLOW_EMPTY_PASSWORD: true
-
-    working_directory: ~/p_kintai
+    <<: *default
     steps:
       - checkout
-      - run: apt-get update -qq && apt-get install -y build-essential nodejs
       - restore_cache:
           keys:
-            - gemfile-{{ checksum "Gemfile.lock" }}
-      - run: bundle install --jobs=4 --path=vendor/bundle --without production
+            - kintai-gemfile-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --jobs=4 --path=vendor/bundle
       - save_cache:
-          key: gemfile-{{ checksum "Gemfile.lock" }}
+          key: kintai-gemfile-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+      - restore_cache:
+          keys:
+            - kintai-yarnfile-{{ checksum "yarn.lock" }}
+      - run: bundle exec yarn install
+      - save_cache:
+          key: kintai-yarnfile-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
       - run: bundle exec rubocop
       - run: bundle exec brakeman -5 -A -w 1 -e -z
+      - run: bundle exec yarn htmlhint
+      - run: bundle exec yarn eslint
+      - run: bundle exec yarn test

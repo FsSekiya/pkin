@@ -2,14 +2,14 @@
   <table class="table table-striped table-hover">
     <tbody>
       <tr>
-        <th class="w40">　</th>
+        <th class="w40">&nbsp;</th>
         <th>ID</th>
         <th>名前</th>
         <th>所属</th>
         <th>時給</th>
       </tr>
       <template v-for="(col, index) in member_list">
-        <tr>
+        <tr :key="col.id">
           <td>
             <i 
               class="fa"
@@ -22,9 +22,9 @@
           <td>{{ col.department }}</td>
           <td>{{ col.hourly_pay }}円</td>
         </tr>
-        <tr v-show="!collapsed[index]">
+        <tr v-show="!collapsed[index]" :key="col.id">
           <td colspan=5>
-            <div>
+            <div class='accordion'>
               Hello
             </div>
           </td>
@@ -55,13 +55,12 @@
     },
     methods: {
       sample: function() {
-        var vm = this
         axios
           .get('/api/customer/sample')
-          .then((res) => {
+          .then(() => {
             alert("owata")
           })
-          .catch((res) => {
+          .catch(() => {
             alert("hazimatta")
           })
       }
