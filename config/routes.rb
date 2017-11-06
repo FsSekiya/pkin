@@ -15,4 +15,10 @@ Rails.application.routes.draw do
     resources :setting, only: [:index]
     resources :record, only: [:index]
   end
+
+  namespace :api, defaults: { format: :json } do
+    namespace :qr do
+      resources :key, only: [:index]
+    end
+  end
 end
