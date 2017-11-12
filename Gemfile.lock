@@ -70,6 +70,10 @@ GEM
     devise_token_auth (0.1.42)
       devise (> 3.5.2, <= 4.3)
       rails (< 6)
+    dotenv (2.2.1)
+    dotenv-rails (2.2.1)
+      dotenv (= 2.2.1)
+      railties (>= 3.2, < 5.2)
     email_validator (1.6.0)
       activemodel
     erubi (1.7.0)
@@ -240,6 +244,7 @@ DEPENDENCIES
   devise
   devise-bootstrap-views
   devise_token_auth
+  dotenv-rails
   email_validator
   foreman
   jbuilder (~> 2.5)
