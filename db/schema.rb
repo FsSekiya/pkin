@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20171103085835) do
   end
 
   create_table "workers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "provider", default: "email", null: false
+    t.string "provider", default: "worker_id", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -65,9 +65,8 @@ ActiveRecord::Schema.define(version: 20171103085835) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["branch_id"], name: "index_workers_on_branch_id"
-    t.index ["email"], name: "index_workers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_workers_on_reset_password_token", unique: true
-    t.index ["uid", "provider"], name: "index_workers_on_uid_and_provider", unique: true
+    t.index ["uid"], name: "index_workers_on_uid", unique: true
   end
 
   add_foreign_key "branches", "companies"
