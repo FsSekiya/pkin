@@ -14,9 +14,9 @@
  *= require_self
  *= require devise_bootstrap_views
  */
-@import 'bootstrap/dist/css/bootstrap';
-@import 'admin-lte/dist/css/AdminLTE';
-@import 'admin-lte/dist/css/skins/skin-blue';
-@import 'admin-lte/plugins/iCheck/all';
+@import '../../../node_modules/bootstrap/dist/css/bootstrap';
+@import '../../../node_modules/admin-lte/dist/css/AdminLTE';
+@import '../../../node_modules/admin-lte/dist/css/skins/skin-blue';
+@import '../../../node_modules/admin-lte/plugins/iCheck/all';
 
-@import '_trump';
+@import './_trump';
