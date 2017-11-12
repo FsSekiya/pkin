@@ -50,5 +50,7 @@ test:
 production:
   <<: *default
   database: p_kintai_production
-  username: p_kintai
+  username: <%= ENV['P_KINTAI_DATABASE_USER_NAME'] %>
   password: <%= ENV['P_KINTAI_DATABASE_PASSWORD'] %>
+  host: <%= ENV['P_KINTAI_DATABASE_HOST'] %>
+  port: <%= ENV['P_KINTAI_DATABASE_PORT'] %>

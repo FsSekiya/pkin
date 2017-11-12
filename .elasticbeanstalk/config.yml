@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: null
+    environment: p-kintai
 global:
   application_name: p_kintai
   branch: null
