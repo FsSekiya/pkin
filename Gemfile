@@ -28,6 +28,8 @@ gem 'devise-bootstrap-views'
 gem 'rack-cors'
 gem 'email_validator'
 
+gem 'forgery_ja'
+
 group :development, :test do
   gem 'better_errors'
   gem 'foreman'
@@ -39,7 +41,6 @@ group :development, :test do
   gem 'rails-erd'
   gem 'rubocop'
   gem 'selenium-webdriver'
-  gem 'forgery_ja'
 end
 
 group :development do
