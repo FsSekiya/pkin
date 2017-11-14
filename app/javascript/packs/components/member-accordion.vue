@@ -9,13 +9,12 @@
         <th>時給</th>
       </tr>
       <template v-for="(col, index) in member_list">
-        <tr :key="col.id">
+        <tr :key="col.id" v-on:click="collapsed.splice(index, 1, !collapsed[index])">
           <td>
             <i 
               class="fa"
               v-bind:class="{'fa-plus':collapsed[index], 'fa-minus':!collapsed[index]}" 
-              aria-hidden="true" 
-              v-on:click="collapsed.splice(index, 1, !collapsed[index])"></i>
+              aria-hidden="true"></i>
           </td>
           <td>{{ col.id }}</td>
           <td>{{ col.name }}</td>

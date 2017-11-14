@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  get 'sample/starter'
-
   devise_for :customer, controllers: {
     sessions: 'customer/sessions'
-  }, skip: %i[registration passwords]
+  }, skip: %i[registration passwords], class_name: 'Customer'
   devise_scope :customer do
     root to: 'customer/sessions#new'
   end
@@ -11,7 +9,8 @@ Rails.application.routes.draw do
   namespace :customer do
     resources :dashboard
     resources :branch, only: %i[index show]
-    resources :setting, only: [:index]
+    resources :setting, only: %i[index]
+    resources :worker, only: %i[new create]
     resources :record, only: [:index]
   end
 

@@ -10,13 +10,10 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  *= require devise_bootstrap_views
  */
-@import '../../../node_modules/bootstrap/dist/css/bootstrap';
-@import '../../../node_modules/admin-lte/dist/css/AdminLTE';
-@import '../../../node_modules/admin-lte/dist/css/skins/skin-blue';
-@import '../../../node_modules/admin-lte/plugins/iCheck/all';
+@import 'bootstrap/dist/css/bootstrap';
+@import 'admin-lte/dist/css/AdminLTE';
+@import 'admin-lte/dist/css/skins/skin-blue';
 
 @import './_trump';

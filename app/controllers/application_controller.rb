@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
   protect_from_forgery with: :exception
 
-  before_action :basic_auth
+  before_action :basic_auth unless %w[development test].include?(Rails.env)
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected

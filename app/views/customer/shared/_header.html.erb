@@ -11,8 +11,8 @@
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="http://baconmockup.com/160/160" class="user-image" alt="User Image">
-            <span class="hidden-xs">Alexander Pierce</span>
+            <%= image_tag current_customer.image, class: "user-image" %>
+            <span class="hidden-xs"><%= current_customer.name %></span>
           </a>
           <ul class="dropdown-menu">
             <li class="user-header">

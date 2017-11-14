@@ -5,8 +5,8 @@
         <img src="http://placeimg.com/160/160/people" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Alexander Pierce</p>
-        <div><i class="fa fa-circle text-success"></i>カウンティア株式会社</div>
+        <p><%= current_customer.name %></p>
+        <div><i class="fa fa-circle text-success"></i><%= current_customer.company.try!(:name) %></div>
       </div>
     </div>
     <ul class="sidebar-menu tree" data-widget="tree">

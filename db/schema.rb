@@ -39,8 +39,10 @@ ActiveRecord::Schema.define(version: 20171113030352) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_customers_on_company_id"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(version: 20171113030352) do
   end
 
   add_foreign_key "branches", "companies"
+  add_foreign_key "customers", "companies"
   add_foreign_key "workers", "branches"
   add_foreign_key "working_records", "workers"
 end

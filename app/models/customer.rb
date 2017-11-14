@@ -5,4 +5,5 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :email, email: true
+  belongs_to :company
 end
