@@ -38,6 +38,7 @@ group :development, :test do
   gem 'rails-erd'
   gem 'rubocop'
   gem 'selenium-webdriver'
+  gem 'forgery_ja'
 end
 
 group :development do
