@@ -39,10 +39,14 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li class="active">
-            <%= link_to customer_record_index_path do %>
-              <i class="fa fa-circle-o"></i>
-              全店舗
+          <li>
+            <% current_customer.company.branches.each do |branch| %>
+              <li>
+                <%= link_to customer_record_path(branch.id) do %>
+                  <i class="fa fa-circle-o"></i>
+                  <%= branch.name %>支店
+                <% end %>
+              </li>
             <% end %>
           </li>
         </ul>

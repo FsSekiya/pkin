@@ -3,9 +3,9 @@
     <tbody>
       <tr>
         <th class="w40">&nbsp;</th>
-        <th>ID</th>
-        <th>名前</th>
-        <th>時給</th>
+        <th class="w50">ID</th>
+        <th class="w120">名前</th>
+        <th class="w120">時給</th>
       </tr>
       <template v-for="(col, index) in member_list">
         <tr :key="col.id" v-on:click="collapsed.splice(index, 1, !collapsed[index])">

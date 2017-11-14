@@ -16,6 +16,7 @@ gem 'webpacker'
 gem 'dotenv-rails'
 
 gem 'simple_form'
+gem 'kaminari'
 
 # トークンベースの認証を行うためのgem
 gem 'devise'

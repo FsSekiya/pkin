@@ -8,10 +8,10 @@ Rails.application.routes.draw do
 
   namespace :customer do
     resources :dashboard
-    resources :branch, only: %i[index show]
+    resources :branch, only: %i[show]
     resources :setting, only: %i[index]
     resources :worker, only: %i[new create]
-    resources :record, only: [:index]
+    resources :record, only: %i[show]
   end
 
   namespace :api, defaults: { format: :json } do
