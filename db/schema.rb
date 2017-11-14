@@ -14,9 +14,11 @@ ActiveRecord::Schema.define(version: 20171113030352) do
 
   create_table "branches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
+    t.string "code"
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_branches_on_code", unique: true
     t.index ["company_id"], name: "index_branches_on_company_id"
   end
 
@@ -60,8 +62,10 @@ ActiveRecord::Schema.define(version: 20171113030352) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "name"
+    t.string "furigana"
     t.string "image"
     t.string "email"
+    t.integer "hourly_pay"
     t.bigint "branch_id"
     t.text "tokens"
     t.datetime "created_at", null: false

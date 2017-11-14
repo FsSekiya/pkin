@@ -35,8 +35,10 @@ class DeviseTokenAuthCreateWorkers < ActiveRecord::Migration[5.1]
 
       ## User Info
       t.string :name
+      t.string :furigana
       t.string :image
       t.string :email
+      t.integer :hourly_pay
       t.references :branch, foreign_key: true
 
       ## Tokens

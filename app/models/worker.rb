@@ -4,6 +4,7 @@ class Worker < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
          authentication_keys: [:uid], case_insensitive_keys: [:uid]
+  belongs_to :branch
 
   def confirmed_at
     Time.now.utc

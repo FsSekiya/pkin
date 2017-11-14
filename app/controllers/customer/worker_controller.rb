@@ -2,6 +2,11 @@ class Customer::WorkerController < Customer::ApplicationController
   layout 'customer'
 
   def new
+    if params[:branch_id].blank?
+      flash[:error] = '遷移が正しくありません'
+      return redirect_to customer_dashboard_index_path
+    end
+
     @worker = Worker.new(branch_id: params[:branch_id])
   end
 
