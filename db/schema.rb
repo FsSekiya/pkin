@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103085835) do
+ActiveRecord::Schema.define(version: 20171113030352) do
 
   create_table "branches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -69,6 +69,16 @@ ActiveRecord::Schema.define(version: 20171103085835) do
     t.index ["uid"], name: "index_workers_on_uid", unique: true
   end
 
+  create_table "working_records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "worker_id"
+    t.datetime "start_at"
+    t.datetime "finish_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["worker_id"], name: "index_working_records_on_worker_id"
+  end
+
   add_foreign_key "branches", "companies"
   add_foreign_key "workers", "branches"
+  add_foreign_key "working_records", "workers"
 end
