@@ -4,6 +4,7 @@
 ## Set Up
 
 ※ Mac以外は、
+  * Windows -> 仮想マシン入れて作業
 
 ### Macの方
 
