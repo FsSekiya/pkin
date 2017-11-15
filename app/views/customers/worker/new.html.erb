@@ -13,7 +13,7 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-body">
-          <%= simple_form_for(@worker, url: customer_worker_index_path, method: :post) do |f| %>
+          <%= simple_form_for(@worker, url: customers_worker_index_path, method: :post) do |f| %>
             <%= f.input :branch_id, as: :hidden %>
             <%= f.input :name %>
             <%= f.input :email %>

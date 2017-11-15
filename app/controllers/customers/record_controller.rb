@@ -1,4 +1,4 @@
-class Customer::RecordController < Customer::ApplicationController
+class Customers::RecordController < Customers::ApplicationController
   def index; end
 
   def show

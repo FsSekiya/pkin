@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    customer_dashboard_index_path if resource.class == Customer
+    customers_dashboard_index_path if resource.class == Customer
   end
 
   def configure_permitted_parameters

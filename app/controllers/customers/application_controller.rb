@@ -1,4 +1,4 @@
-class Customer::ApplicationController < ApplicationController
+class Customers::ApplicationController < ApplicationController
   devise_group :customer, contains: [:customer]
   before_action :authenticate
   layout 'customer'

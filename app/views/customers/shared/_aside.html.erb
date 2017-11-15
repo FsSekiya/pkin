@@ -22,7 +22,7 @@
         <ul class="treeview-menu">
           <% current_customer.company.branches.each do |branch| %>
             <li>
-              <%= link_to customer_branch_path(branch.id) do %>
+              <%= link_to customers_branch_path(branch.id) do %>
                 <i class="fa fa-circle-o"></i>
                 <%= branch.name %>支店
               <% end %>
@@ -42,7 +42,7 @@
           <li>
             <% current_customer.company.branches.each do |branch| %>
               <li>
-                <%= link_to customer_record_path(branch.id) do %>
+                <%= link_to customers_record_path(branch.id) do %>
                   <i class="fa fa-circle-o"></i>
                   <%= branch.name %>支店
                 <% end %>
@@ -52,7 +52,7 @@
         </ul>
       </li>
       <li>
-        <%= link_to customer_setting_index_path do %>
+        <%= link_to customers_setting_index_path do %>
           <i class="fa fa-cog"></i>
           <span>SETTING</span>
         <% end %>

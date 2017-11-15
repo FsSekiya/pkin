@@ -1,4 +1,4 @@
-class Customer::SessionsController < Devise::SessionsController
+class Customers::SessionsController < Devise::SessionsController
   layout 'toppage'
 
   # before_action :configure_sign_in_params, only: [:create]
