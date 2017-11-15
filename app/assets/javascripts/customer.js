@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery/dist/jquery
+//= require jquery-ujs/src/rails.js
 //= require admin-lte/plugins/iCheck/icheck
 //= require bootstrap/dist/js/bootstrap
 //= require admin-lte/dist/js/adminlte
