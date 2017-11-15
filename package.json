@@ -11,11 +11,13 @@
     "admin-lte": "^2.4.2",
     "axios": "^0.17.0",
     "babel-eslint": "^8.0.1",
+    "chart.js": "^2.7.1",
     "eslint": "^4.10.0",
     "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-vue": "^3.13.1",
     "htmlhint": "^0.9.13",
     "vue": "^2.5.2",
+    "vue-chartjs": "^3.0.2",
     "vue-eslint-parser": "^2.0.1-beta.1",
     "vue-loader": "^13.3.0",
     "vue-template-compiler": "^2.5.2"
