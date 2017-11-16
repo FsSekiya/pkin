@@ -30,6 +30,9 @@ gem 'email_validator'
 
 gem 'forgery_ja'
 
+# 監視・監査
+gem 'paper_trail'
+
 group :development, :test do
   gem 'better_errors'
   gem 'foreman'
