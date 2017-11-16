@@ -4,6 +4,14 @@ if Rails.env.development?
 
 
   company = Company.create(name: 'カウンティア株式会社')
+
+  CompanySetting.create(
+    company_id: company.id,
+    approve_auto_prepayment: 'auto_prepayment_approved',
+    prepayment_allowed_percentage: rand(100),
+    wage_calculation_time_unit: 60
+  )
+
   5.times do
     Company.create(name: ForgeryJa(:name).company_name)
   end

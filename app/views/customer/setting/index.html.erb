@@ -16,15 +16,15 @@
             <tbody>
               <tr>
                 <th class="w200">時給計算時間単位</th>
-                <td>表示のみ(1分単位、15分単位など)</td>
+                <td><%= current_customer.company.company_setting.wage_calculation_time_unit %></td>
               </tr>
               <tr>
                 <th>前払い自動承認</th>
-                <td>ON/OFF</td>
+                <td><%= current_customer.company.company_setting.auto_prepayment_approved? ? 'ON' : 'OFF' %></td>
               </tr>
               <tr>
                 <th>前払い可能額割合</th>
-                <td>60%</td>
+                <td><%= current_customer.company.company_setting.prepayment_allowed_percentage %>%</td>
               </tr>
             </tbody>
           </table>
