@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+bundle exec erd --attributes=foreign_keys,primary_keys,content,timestamp --filename=erd --filetype=pdf

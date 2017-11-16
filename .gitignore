@@ -206,4 +206,4 @@ jspm_packages
 /public/packs-test
 /node_modules
 .tmp/
-.env
+erd.pdf
