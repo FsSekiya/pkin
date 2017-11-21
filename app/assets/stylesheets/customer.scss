@@ -17,3 +17,45 @@
 @import 'admin-lte/dist/css/skins/skin-blue';
 
 @import './_trump';
+
+.person-header {
+    margin-left: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.content-positioning {
+    margin-top: 1em;
+    margin-left: 3.75em;
+    margin-right: 3.75em;
+}
+
+.person-name {
+    font-size: large;
+    font-weight: bold;
+    margin-left: 0.75em;
+}
+
+.image-90 {
+    horiz-align: center;
+    width: 60px;
+    height: 60px;
+    background-size: 90px 90px;
+    margin: 5px;
+    border: 1px rgb(218, 218, 218) solid;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  /* border-spacing: 5px 12px; */
+  /* padding: 0 8px 8px 0; */
+}
+td {
+  height: 40px;
+  vertical-align: middle;
+  border-bottom: 2px solid #ddd;
+  border-top: unset;
+  border-left: unset;
+  border-right: unset;
+}

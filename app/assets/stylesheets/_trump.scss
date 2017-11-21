@@ -51,10 +51,22 @@ $width-base: 10;
 .ml0 {
   margin-left: 0 !important;
 }
+.m-center {
+  margin: 0 auto;
+}
 
 @for $i from 1 through 20 {
   .w#{$i * $width-base} {
     width: #{$i * $width-base}px !important;
+  }
+  .w#{$i * $width-base + 200} {
+    width: #{$i * $width-base + 200}px !important;
+  }
+  .h#{$i * $width-base} {
+    height: #{$i * $width-base}px !important;
+  }
+  .lh#{$i * $width-base} {
+    line-height: #{$i * $width-base}px !important;
   }
 }
 
@@ -64,4 +76,8 @@ $width-base: 10;
 
 .c-p {
   cursor: pointer;
+}
+
+.bg-white {
+  background: white;
 }

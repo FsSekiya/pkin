@@ -23,6 +23,6 @@ describe('member-accordion.vue', () => {
       }
     })
     wrapper.find('i.fa').trigger('click')
-    expect(wrapper.find('div.accordion').text()).toMatch('Hello')
+    expect(wrapper.find('div.accordion').text()).toMatch('入社年月日')
   })
 })

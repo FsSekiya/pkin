@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+access-token: U3bFCkNNAJ61INT6eoxmqw
+token-type: Bearer
+client: z50-0SGOgj84ZoJMek7gpw
+expiry: 1513492685
+uid: 1ymhic499m
+ETag: W/"5e3d21061637d4fdfd174794cc26f55e"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: d724d797-da0b-4725-9ad5-6c10fa224b3d
+X-Runtime: 6.247523
+Transfer-Encoding: chunked
+
