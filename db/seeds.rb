@@ -61,4 +61,10 @@ if Rails.env.development?
       email: email_forgery.address
     )
   end
+  Worker.all.each do |worker|
+    100.times do
+      date = Faker::Time.between(DateTime.now - 4.month, DateTime.now)
+      WorkingRecord.create(worker_id: worker.id, start_at: date, finish_at: date + rand(1..8).hour)
+    end
+  end
 end

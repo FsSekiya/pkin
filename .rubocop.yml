@@ -51,6 +51,7 @@ AllCops:
     - Gemfile
     - spec/**/*
     - config/initializers/*
+    - config/routes.rb
 
 Metrics/CyclomaticComplexity:
   Max: 10

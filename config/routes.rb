@@ -26,5 +26,9 @@ Rails.application.routes.draw do
     namespace :qr do
       resources :key, only: [:index]
     end
+
+    namespace :customer do
+      resources :worker_record
+    end
   end
 end

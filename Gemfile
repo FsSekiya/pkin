@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'autoprefixer-rails'
 gem 'webpacker'
 gem 'dotenv-rails'
+gem 'active_model_serializers'
 
 gem 'simple_form'
 gem 'kaminari'
@@ -43,6 +44,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rails-erd'
   gem 'rubocop'
+  gem 'faker'
   gem 'selenium-webdriver'
 end
 

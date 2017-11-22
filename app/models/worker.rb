@@ -5,6 +5,8 @@ class Worker < ApplicationRecord
          :recoverable, :rememberable, :trackable,
          authentication_keys: [:uid], case_insensitive_keys: [:uid]
   belongs_to :branch
+  has_many :working_records, dependent: :destroy
+
   has_paper_trail(
     ignore: %i[
       reset_password_token
