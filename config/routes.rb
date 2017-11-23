@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
 
     namespace :customer do
-      resources :worker_record
+      resources :worker_record, only: [:show]
     end
   end
 end

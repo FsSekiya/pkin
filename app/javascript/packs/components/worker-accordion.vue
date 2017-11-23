@@ -26,7 +26,7 @@
               <button type="button" class="btn btn-secondary col-md-4 col-md-offset-1">前払金ログ</button>
               <button type="button" class="btn btn-primary col-md-4 col-md-offset-2">出席ログ</button>
             </div>
-            <working-record :working_records='working_records'></working-record>
+            <working-record :working-records='working_records' :worker-id='current_worker.id'></working-record>
           </td>
         </tr>
       </template>
@@ -58,6 +58,7 @@
         working_records: [],
         current_open_index: 0,
         current_worker: {
+          id: '',
           uid: '',
           name: '',
           address: '',
@@ -77,7 +78,7 @@
         var vm = this
         axios
           .get('/api/customer/worker_record/' + worker_id)
-          .then(({data, status}) => {
+          .then(({data, _status}) => {
             if (vm.current_open_index !== 0) {
               vm.$set(vm.collapsed, vm.current_open_index, !vm.collapsed[vm.current_open_index])
             }
@@ -87,7 +88,6 @@
             vm.working_records = data.working_records
           })
           .catch(() => {
-            alert("connection error")
           })
       },
     }

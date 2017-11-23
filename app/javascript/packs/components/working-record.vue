@@ -18,10 +18,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="row in working_records">
-            <td>{{ row.start_date }}</td>
-            <td>{{ row.start_time }}</td>
-            <td>{{ row.finish_time }}</td>
+          <tr v-for="working_record in working_records" :key="working_record.id">>
+            <td>{{ working_record.start_date }}</td>
+            <td>{{ working_record.start_time }}</td>
+            <td>{{ working_record.finish_time }}</td>
             <td>未実装</td>
             <td>未実装</td>
             <td>未実装</td>
@@ -38,21 +38,40 @@
     components: {
     },
     props: [
-      'working_records'
+      'workingRecords',
+      'workerId'
     ],
     data: function () {
       return {
-        current_month: (new Date())
+        current_month: (new Date()),
+        month_diff: 0,
+        working_records: this.workingRecords,
+        worker_id: this.workerId
+      }
+    },
+    watch: {
+      workingRecords: function (val) {
+        this.working_records = val
+      },
+      workerId: function (val) {
+        this.worker_id = val
       }
     },
     created: function () {
     },
     methods: {
-      update_worker_rows: function(month_diff) {
-      },
       update_date: function(increment) {
         var vm = this
-        vm.current_month = new Date(vm.current_month.setMonth(vm.current_month.getMonth() + increment))
+        let diff = vm.month_diff + increment
+        axios
+          .get('/api/customer/worker_record/' + vm.worker_id + '?month_diff=' + diff)
+          .then(({data, _status}) => {
+            vm.working_records = data.working_records
+            vm.current_month = new Date(vm.current_month.setMonth(vm.current_month.getMonth() + increment))
+            vm.month_diff += increment
+          })
+          .catch(() => {
+          })
       },
       older_than_current_month: function() {
         let today = new Date()

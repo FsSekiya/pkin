@@ -20,6 +20,10 @@
     "sourceType": "module"
   },
   "rules": {
-    "vue/valid-v-if": "error"
+    "vue/valid-v-if": "error",
+    "no-unused-vars": [
+      2,
+      {"argsIgnorePattern": "^_"}
+    ]
   }
 }
