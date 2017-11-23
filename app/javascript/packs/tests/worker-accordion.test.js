@@ -1,9 +1,9 @@
 import { mount } from 'vue-test-utils'
-import MemberAccordion from '../components/member-accordion.vue'
+import WorkerAccordion from '../components/worker-accordion.vue'
 
-describe('member-accordion.vue', () => {
+describe('worker-accordion.vue', () => {
   it('click plus sign open up the row', () => {
-    const memberList = [
+    const workerList = [
       {
         id: 1,
         name: '名前',
@@ -17,9 +17,9 @@ describe('member-accordion.vue', () => {
         hourly_pay: 1000
       },
     ]
-    const wrapper = mount(MemberAccordion, {
+    const wrapper = mount(WorkerAccordion, {
       propsData: {
-        memberList: JSON.stringify(memberList)
+        workerList: JSON.stringify(workerList)
       }
     })
     wrapper.find('i.fa').trigger('click')

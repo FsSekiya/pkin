@@ -16,14 +16,14 @@
     <div class="col-xs-12">
       <div class="box">
         <div class="box-footer clearfix">
-          <%= paginate @member_list, views_prefix: 'customer' %>
+          <%= paginate @worker_list, views_prefix: 'customer' %>
         </div>
         <div class="box-body table-responsive no-padding">
-          <member-accordion member-list="<%= @member_list.to_json %>">
-          </member-accordion>
+          <worker-accordion worker-list="<%= @worker_list.to_json %>">
+          </worker-accordion>
         </div>
         <div class="box-footer clearfix">
-          <%= paginate @member_list, views_prefix: 'customer' %>
+          <%= paginate @worker_list, views_prefix: 'customer' %>
         </div>
       </div>
     </div>

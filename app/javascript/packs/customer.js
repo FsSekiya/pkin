@@ -8,7 +8,7 @@
 
 
 import Vue from 'vue/dist/vue.esm'
-import MemberAccordion from './components/member-accordion.vue'
+import WorkerAccordion from './components/worker-accordion.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   new Vue({
@@ -16,6 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     data: {
       message: "Can you say hello?"
     },
-    components: { MemberAccordion }
+    components: { WorkerAccordion }
   })
 })

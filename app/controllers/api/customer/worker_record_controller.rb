@@ -5,7 +5,7 @@ class Api::Customer::WorkerRecordController < Api::ApplicationController
     render json: {
       worker: worker,
       working_records: ActiveModelSerializers::SerializableResource.new(
-        WorkingRecord.where(worker_id: worker.id, start_at: today.beginning_of_month..today.end_of_month),
+        WorkingRecord.where(worker_id: worker.id, start_at: today.beginning_of_month..today.end_of_month).order(:start_at),
         adapter: :json
       ).as_json[:working_records]
     }, adapter: :json
