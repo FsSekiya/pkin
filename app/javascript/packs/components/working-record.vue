@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="working_record in working_records" :key="working_record.id">>
+          <tr v-for="working_record in working_records" :key="working_record.id">
             <td>{{ working_record.start_date }}</td>
             <td>{{ working_record.start_time }}</td>
             <td>{{ working_record.finish_time }}</td>
