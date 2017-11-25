@@ -21,7 +21,8 @@
     "vue-chartjs": "^3.0.2",
     "vue-eslint-parser": "^2.0.1-beta.1",
     "vue-loader": "^13.3.0",
-    "vue-template-compiler": "^2.5.2"
+    "vue-template-compiler": "^2.5.2",
+    "vue2-bootstrap-modal": "^0.1.14"
   },
   "devDependencies": {
     "expect": "^21.2.1",

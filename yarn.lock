@@ -6721,6 +6721,10 @@ vue-test-utils@^1.0.0-beta.4:
   dependencies:
     lodash "^4.17.4"
 
+vue2-bootstrap-modal@^0.1.14:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/vue2-bootstrap-modal/-/vue2-bootstrap-modal-0.1.14.tgz#deb7deb36d09dc46b86108a6f24b1681810f65d0"
+
 vue@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.2.tgz#fd367a87bae7535e47f9dc5c9ec3b496e5feb5a4"

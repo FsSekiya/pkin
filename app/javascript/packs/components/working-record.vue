@@ -22,18 +22,34 @@
             <td>{{ working_record.start_time }}</td>
             <td>{{ working_record.finish_time }}</td>
             <td>{{ working_record.payment }}円(時給{{ working_record.hourly_pay }}円)</td>
-            <td>未実装</td>
+            <td>
+              <button v-on:click="working_record_edit_open()">編集</button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <bootstrap-modal ref="working_record_edit"
+                     :need-header="true"
+                     :need-footer="true"
+                     :size="'large'">
+      <div slot="title">
+        Your title here
+      </div>
+      <div slot="body">
+        Your body here
+      </div>
+      <div slot="footer">
+        Your footer here
+      </div>
+    </bootstrap-modal>
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
   export default {
     components: {
+      'bootstrap-modal': require('vue2-bootstrap-modal')
     },
     props: [
       'workingRecords',
@@ -77,6 +93,9 @@
           return false
         }
         return true
+      },
+      working_record_edit_open: function() {
+        this.$refs.working_record_edit.open()
       }
     }
   }
