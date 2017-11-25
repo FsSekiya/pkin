@@ -52,7 +52,7 @@ if Rails.env.development?
       password_confirmation: '12341234',
       uid: Branch.first.code + (0...5).map { o[rand(o.length)] }.join,
       branch_id: Branch.first.id,
-      hourly_pay: 1200,
+      hourly_pay: rand(8..13) * 100,
       address: address_forgery.full_address,
       phone_number: mobile_forgery.phone_number,
       entrance_date: entrance_date,
@@ -64,7 +64,13 @@ if Rails.env.development?
   Worker.all.each do |worker|
     100.times do
       date = Faker::Time.between(DateTime.now - 4.month, DateTime.now)
-      WorkingRecord.create(worker_id: worker.id, start_at: date, finish_at: date + rand(1..8).hour)
+      working_time = rand(1..8).hour
+      WorkingRecord.create(worker_id: worker.id,
+                           start_at: date,
+                           finish_at: date + working_time,
+                           hourly_pay: worker.hourly_pay,
+                           payment: (worker.hourly_pay.to_i * (working_time / 3600.0).round(2)).to_i
+                          )
     end
   end
 end

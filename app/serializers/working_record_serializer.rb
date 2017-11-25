@@ -1,5 +1,6 @@
 class WorkingRecordSerializer < ActiveModel::Serializer
-  attributes :id, :start_time, :finish_time, :start_date
+  attributes :id, :start_time, :finish_time, :start_date,
+             :hourly_pay, :payment
 
   def start_time
     object.start_at.strftime('%H:%m')

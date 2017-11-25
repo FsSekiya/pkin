@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(version: 20171116105249) do
     t.bigint "worker_id"
     t.datetime "start_at"
     t.datetime "finish_at"
+    t.integer "payment"
+    t.integer "hourly_pay"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["worker_id"], name: "index_working_records_on_worker_id"

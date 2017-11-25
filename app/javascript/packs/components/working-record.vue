@@ -12,7 +12,6 @@
             <th scope="col">日付</th>
             <th scope="col">出勤</th>
             <th scope="col">退勤</th>
-            <th scope="col">休憩</th>
             <th scope="col">給与</th>
             <th scope="col">編集</th>
           </tr>
@@ -22,8 +21,7 @@
             <td>{{ working_record.start_date }}</td>
             <td>{{ working_record.start_time }}</td>
             <td>{{ working_record.finish_time }}</td>
-            <td>未実装</td>
-            <td>未実装</td>
+            <td>{{ working_record.payment }}円(時給{{ working_record.hourly_pay }}円)</td>
             <td>未実装</td>
           </tr>
         </tbody>

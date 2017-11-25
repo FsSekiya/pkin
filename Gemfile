@@ -30,6 +30,7 @@ gem 'rack-cors'
 gem 'email_validator'
 
 gem 'forgery_ja'
+gem 'faker'
 
 # 監視・監査
 gem 'paper_trail'
@@ -44,7 +45,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rails-erd'
   gem 'rubocop'
-  gem 'faker'
   gem 'selenium-webdriver'
 end
 

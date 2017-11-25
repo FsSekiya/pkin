@@ -4,6 +4,8 @@ class CreateWorkingRecords < ActiveRecord::Migration[5.1]
       t.references :worker, foreign_key: true
       t.datetime :start_at
       t.datetime :finish_at
+      t.integer  :payment
+      t.integer  :hourly_pay
 
       t.timestamps
     end
