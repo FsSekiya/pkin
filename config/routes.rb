@@ -22,6 +22,13 @@ Rails.application.routes.draw do
                                             controllers: {
                                               sessions: 'api/worker/sessions'
                                             }, skip: %i[registration passwords]
+      resources :working_record, only: [] do
+        collection do
+          get :amount
+          post :start
+          post :finish
+        end
+      end
     end
 
     namespace :qr do
