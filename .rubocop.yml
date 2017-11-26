@@ -17,9 +17,7 @@ Metrics/AbcSize:
   Max: 30
   Exclude:
     - app/controllers/api/soundshare/history_controller.rb
-
-Style/MultilineOperationIndentation:
-  EnforcedStyle: indented
+    - app/controllers/api/customer/worker_record_controller.rb
 
 AsciiComments:
   Enabled: false

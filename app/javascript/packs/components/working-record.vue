@@ -9,11 +9,11 @@
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th scope="col">日付</th>
+            <th scope="col" class="w150">日付</th>
             <th scope="col">出勤</th>
             <th scope="col">退勤</th>
             <th scope="col">給与</th>
-            <th scope="col">編集</th>
+            <th scope="col">　</th>
           </tr>
         </thead>
         <tbody>
@@ -23,7 +23,7 @@
             <td>{{ working_record.finish_time }}</td>
             <td>{{ working_record.payment }}円(時給{{ working_record.hourly_pay }}円)</td>
             <td>
-              <button v-on:click="working_record_edit_open()">編集</button>
+              <button @click.prevent.self="working_record_edit_open(worker, working_record)" class="btn btn-info">修正</button>
             </td>
           </tr>
         </tbody>
@@ -31,44 +31,86 @@
     </div>
     <bootstrap-modal ref="working_record_edit"
                      :need-header="true"
-                     :need-footer="true"
+                     :need-footer="false"
                      :size="'large'">
       <div slot="title">
-        Your title here
+        {{ modal_worker.name }}さんの{{modal_data.record_date}}の記録を修正する
       </div>
       <div slot="body">
-        Your body here
+        <div class="content" ref="workingRecord">
+          <div class="form-group row">
+            <label for="example-text-input" class="col-md-2 col-form-label mt5">開始時刻</label>
+            <div class="col-md-10">
+              <vue-timepicker :minute-interval='1' v-model="modal_data.start_time"></vue-timepicker>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="example-text-input" class="col-md-2 col-form-label mt5">終了時刻</label>
+            <div class="col-md-10">
+              <vue-timepicker :minute-interval='1' v-model="modal_data.finish_time"></vue-timepicker>
+            </div>
+          </div>
+          <div class="form-group row">
+            <button type="submit" class="btn btn-warning col-md-4 col-md-offset-4" @click="update_working_record">送信</button>
+          </div>
+        </div>
       </div>
       <div slot="footer">
-        Your footer here
       </div>
     </bootstrap-modal>
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
+  import bootstrapModal from 'vue2-bootstrap-modal'
+  import VueTimepicker from 'vue2-timepicker'
+  var tokens = document.getElementsByName('csrf-token')
+  if (tokens.length) {
+    axios.defaults.headers['X-CSRF-Token'] = tokens.item(0).content
+  }
+
   export default {
+    template: '...',
     components: {
-      'bootstrap-modal': require('vue2-bootstrap-modal')
+      bootstrapModal,
+      VueTimepicker
     },
     props: [
       'workingRecords',
-      'workerId'
+      'worker'
     ],
     data: function () {
       return {
         current_month: (new Date()),
         month_diff: 0,
         working_records: this.workingRecords,
-        worker_id: this.workerId
+        worker_id: this.worker.id,
+        modal_worker: {
+          name: '',
+        },
+        modal_data: {
+          id: '',
+          title: '',
+          record_date: '',
+          start_time: {
+            'HH': '',
+            'mm': ''
+          },
+          finish_time: {
+            'HH': '',
+            'mm': ''
+          },
+        },
+        token: axios.defaults.headers['X-CSRF-Token']
       }
     },
     watch: {
       workingRecords: function (val) {
         this.working_records = val
       },
-      workerId: function (val) {
-        this.worker_id = val
+      worker: function (val) {
+        this.worker_id = val.id
       }
     },
     created: function () {
@@ -94,7 +136,41 @@
         }
         return true
       },
-      working_record_edit_open: function() {
+      update_working_record() {
+        var vm = this
+        axios
+          .put('/api/customer/worker_record/' + vm.worker_id,
+               { 'worker_record': {'record_date': vm.modal_data.record_date,
+                                   'finish_time': vm.modal_data.finish_time,
+                                   'start_time' : vm.modal_data.start_time,
+                                   'id'         : vm.modal_data.id
+                                  }
+               }).then(({data, _status}) => {
+                 var vm_data = vm.working_records.find((e)=> { return e.id === vm.modal_data.id})
+                 vm.$set(vm_data, 'start_time',
+                         vm.modal_data.start_time['HH'] + ':' + vm.modal_data.start_time['mm'])
+                 vm.$set(vm_data, 'finish_time',
+                         vm.modal_data.finish_time['HH'] + ':' + vm.modal_data.finish_time['mm'])
+                 vm.$set(vm_data, 'payment', data.payment)
+
+                 this.$refs.working_record_edit.close()
+                 alert(data.message)
+               },({error, response}) => {
+                 alert(response.data.message)
+               }).catch(() => {})
+      },
+      working_record_edit_open: function(current_worker, working_record) {
+        var vm = this
+        vm.modal_worker = current_worker
+        vm.$set(vm.modal_data, 'record_date', working_record.start_date)
+
+        let start_time = working_record.start_time.split(':')
+        let finish_time = working_record.finish_time.split(':')
+
+        vm.$set(vm.modal_data, 'id', working_record.id)
+        vm.$set(vm.modal_data, 'start_time', {'HH': start_time[0], 'mm': start_time[1]})
+        vm.$set(vm.modal_data, 'finish_time', {'HH': finish_time[0], 'mm': finish_time[1]})
+
         this.$refs.working_record_edit.open()
       }
     }

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :branch, only: %i[show]
     resources :setting, only: %i[index]
     resources :worker, only: %i[new create]
+    resources :working_record, only: %i[update]
     resources :record, only: %i[show]
   end
 
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
     end
 
     namespace :customer do
-      resources :worker_record, only: [:show]
+      resources :worker_record, only: [:show, :update]
     end
   end
 end

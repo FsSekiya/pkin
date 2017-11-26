@@ -3,11 +3,15 @@ class WorkingRecordSerializer < ActiveModel::Serializer
              :hourly_pay, :payment
 
   def start_time
-    object.start_at.strftime('%H:%m')
+    object.start_at.strftime('%H:%M')
   end
 
   def finish_time
-    object.finish_at.strftime('%H:%m')
+    if object.start_at.strftime('%m:%d') < object.finish_at.strftime('%m:%d')
+      "#{object.finish_at.hour + 24}:#{object.finish_at.min}"
+    else
+      object.finish_at.strftime('%H:%M')
+    end
   end
 
   def start_date

@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     data: {
       message: "Can you say hello?"
     },
-    components: { WorkerAccordion }
+    components: {
+      WorkerAccordion
+    }
   })
 })

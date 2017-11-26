@@ -26,7 +26,9 @@
               <button type="button" class="btn btn-secondary col-md-4 col-md-offset-1">前払金ログ</button>
               <button type="button" class="btn btn-primary col-md-4 col-md-offset-2">出席ログ</button>
             </div>
-            <working-record :working-records='working_records' :worker-id='current_worker.id'></working-record>
+            <working-record :working-records='working_records'
+                            :worker='current_worker'
+                            ></working-record>
           </td>
         </tr>
       </template>
