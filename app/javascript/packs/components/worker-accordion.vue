@@ -23,12 +23,19 @@
           <td colspan="4">
             <worker-basic-info :worker='current_worker'></worker-basic-info>
             <div class="clearfix mt20 p10">
-              <button type="button" class="btn btn-secondary col-md-4 col-md-offset-1">前払金ログ</button>
-              <button type="button" class="btn btn-primary col-md-4 col-md-offset-2">出席ログ</button>
+              <button type="button" v-on:click="show_payment_records" class="btn btn-secondary col-md-4 col-md-offset-1">前払金ログ</button>
+              <button type="button" v-on:click="show_worker_records" class="btn btn-primary col-md-4 col-md-offset-2">出席ログ</button>
             </div>
-            <working-record :working-records='working_records'
+            <span id="working_records_span" v-if="workerRecordsActive">
+                <working-record :working-records='working_records'
                             :worker='current_worker'
                             ></working-record>
+            </span>
+            <span id="payment_records_span" v-if="paymentRecordsActive">
+                <payment-record :payment-records='payment_records'
+                            :worker='current_worker'
+                            ></payment-record>
+            </span>
           </td>
         </tr>
       </template>
@@ -40,6 +47,7 @@
   import axios from 'axios'
   import WorkerBasicInfo from './worker-basic-info.vue'
   import WorkingRecord from './working-record.vue'
+  import PaymentRecord from './payment-record.vue'
   var tokens = document.getElementsByName('csrf-token')
   if (tokens.length) {
     axios.defaults.headers['X-CSRF-Token'] = tokens.item(0).content
@@ -47,7 +55,8 @@
   export default {
     components: {
       WorkerBasicInfo,
-      WorkingRecord
+      WorkingRecord,
+      PaymentRecord
     },
     props: [
       'workerList',
@@ -58,7 +67,10 @@
         collapsed: new Array(worker_list.length).fill(true),
         worker_list: worker_list,
         working_records: [],
+        payment_records: [],
         current_open_index: 0,
+        workerRecordsActive: true,
+        paymentRecordsActive: false,
         current_worker: {
           id: '',
           uid: '',
@@ -91,6 +103,14 @@
           })
           .catch(() => {
           })
+      },
+      show_payment_records: function() {
+        this.workerRecordsActive = false;
+        this.paymentRecordsActive = true;
+      },
+      show_worker_records: function() {
+        this.workerRecordsActive = true;
+        this.paymentRecordsActive = false;
       },
     }
   }
