@@ -8,12 +8,20 @@
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <%= image_tag current_customer.image, class: "user-image" %>
+            <% if current_customer.image.present? %>
+              <%= image_tag current_customer.image, class: "img-circle", alt: "User Image", size: '25x25' %>
+            <% else %>
+              <%= image_tag 'common/profile.svg', class: "img-circle", alt: "User Image", size: '25x25' %>
+            <% end %>
             <span class="hidden-xs"><%= current_customer.name %></span>
           </a>
           <ul class="dropdown-menu">
             <li class="user-header">
-              <img src="http://baconmockup.com/160/160" class="img-circle" alt="User Image">
+              <% if current_customer.image.present? %>
+                <%= image_tag current_customer.image, class: "img-circle", alt: "User Image", size: '90x90' %>
+              <% else %>
+                <%= image_tag 'common/profile.svg', class: "img-circle", alt: "User Image", size: '90x90' %>
+              <% end %>
               <p>
                 Alexander Pierce - Web Developer
                 <small>Member since Nov. 2012</small>

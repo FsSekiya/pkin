@@ -1,0 +1,52 @@
+<section class="content-header">
+  <div class="row">
+    <div class="col-xs-8">
+      <h1>
+        <%= @branch.name %>支店
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <h2 class="row border p10 text-center w400 m-center">
+    <div class="col-md-2">
+      <%= link_to customer_apply_path(params[:id], diff: params[:diff].to_i - 1) do %>
+        ◀
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <%= @current_month %>
+    </div>
+    <div class="col-md-2">
+      <% if params[:diff].to_i != 0 %>
+        <%= link_to customer_apply_path(params[:id], diff: params[:diff].to_i + 1) do %>
+          ▶
+        <% end %>
+      <% end %>
+    </div>
+  </h2>
+  <div class="text-center mt40">
+    <h2>預かり金額 ¥<%= 1000000.to_s(:delimited) %></h2>
+  </div>
+  <div class="row mt40">
+    <div class="col-xs-5 col-xs-offset-1">
+      <chartjs-bar :labels="['給与総額','前払利用額']" :data="[100,40]" :option="{responsive:true, legend: {display: false}, scales: {yAxes: [{stacked: true}]}}"></chartjs-bar>
+    </div>
+    <div class="col-xs-5">
+      <chartjs-doughnut :datalabel="'TestDataLabel'"
+                        :labels="['利用', '残り']"
+                        :data="[40, 60]"
+                        :option="{}"
+                        ></chartjs-doughnut>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="panel panel-default">
+    <div class="panel-heading text-center"><h4>前払い金ログ</h4></div>
+    <application-record application-list="<%= @application_list.to_json %>">
+    </application-record>
+  </div>
+</section>

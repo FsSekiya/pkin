@@ -9,7 +9,7 @@
       </tr>
       <template v-for="(col, index) in worker_list">
         <tr :key="col.id" v-on:click="open_worker_info(index, col.id)">
-          <td>
+          <td class="text-center">
             <i
               class="fa"
               v-bind:class="{'fa-plus':collapsed[index], 'fa-minus':!collapsed[index]}"

@@ -2,8 +2,11 @@
   <section class="sidebar" style="height: auto;">
     <div class="user-panel">
       <div class="pull-left image">
-        <% #image_tag current_customer.image, class: "img-circle" %>
-        <img src="http://placeimg.com/160/160/people" class="img-circle" alt="User Image">
+        <% if current_customer.image.present? %>
+          <%= image_tag current_customer.image, class: "img-circle", alt: "User Image", size: '45x45' %>
+        <% else %>
+          <%= image_tag 'common/profile.svg', class: "img-circle", alt: "User Image", size: '45x45' %>
+        <% end %>
       </div>
       <div class="pull-left info">
         <p><%= current_customer.name %></p>
@@ -30,7 +33,7 @@
           <% end %>
         </ul>
       </li>
-      <li class="treeview <%= 'active menu-open' if controller_name == 'record' %>">
+      <li class="treeview <%= 'active menu-open' if controller_name == 'apply' %>">
         <a href="#">
           <i class="fa fa-file"></i>
           <span>RECORD</span>
@@ -42,7 +45,7 @@
           <li>
             <% current_customer.company.branches.each do |branch| %>
               <li>
-                <%= link_to customer_record_path(branch.id) do %>
+                <%= link_to customer_apply_path(branch.id) do %>
                   <i class="fa fa-circle-o"></i>
                   <%= branch.name %>支店
                 <% end %>

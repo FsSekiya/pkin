@@ -56,6 +56,9 @@ $width-base: 10;
 }
 
 @for $i from 1 through 20 {
+  .w#{$i * $width-base / 2}p {
+    width: #{$i * $width-base / 2}% !important;
+  }
   .w#{$i * $width-base} {
     width: #{$i * $width-base}px !important;
   }

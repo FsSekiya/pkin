@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :setting, only: %i[index]
     resources :worker, only: %i[new create]
     resources :working_record, only: %i[update]
-    resources :record, only: %i[show]
+    resources :apply, only: %i[show]
   end
 
   namespace :api, defaults: { format: :json } do
