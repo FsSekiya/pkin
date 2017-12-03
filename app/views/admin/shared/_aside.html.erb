@@ -1,0 +1,46 @@
+<aside class="main-sidebar">
+  <section class="sidebar" style="height: auto;">
+    <div class="user-panel">
+      <div class="pull-left image">
+        <% if current_admin.image.present? %>
+          <%= image_tag current_admin.image, class: "img-circle", alt: "User Image", size: '45x45' %>
+        <% else %>
+          <%= image_tag 'common/profile.svg', class: "img-circle", alt: "User Image", size: '45x45' %>
+        <% end %>
+      </div>
+      <div class="pull-left info">
+        <p><%= current_admin.name %></p>
+      </div>
+    </div>
+    <ul class="sidebar-menu tree" data-widget="tree">
+      <li class="header">選択してください</li>
+      <li class="treeview <%= 'active menu-open' if controller_name == 'branch' %>">
+        <a href="#">
+          <i class="fa fa-male"></i> <span>WORKER</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+        </ul>
+      </li>
+      <li class="treeview <%= 'active menu-open' if controller_name == 'apply' %>">
+        <a href="#">
+          <i class="fa fa-file"></i>
+          <span>RECORD</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <i class="fa fa-cog"></i>
+        <span>SETTING</span>
+      </li>
+    </ul>
+  </section>
+</aside>

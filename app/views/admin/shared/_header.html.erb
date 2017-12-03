@@ -1,5 +1,5 @@
 <header class="main-header">
-  <%= link_to customer_dashboard_index_path, class: 'logo' do %>
+  <%= link_to admin_dashboard_index_path, class: 'logo' do %>
     <span class="logo-mini"><b>A</b>LT</span>
     <span class="logo-lg"><b>Admin</b>LTE</span>
   <% end %>
@@ -8,17 +8,17 @@
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
           <a href="#" data-toggle="dropdown" style="line-height: 20px; display: block;padding: 10px 15px;">
-            <% if current_customer.image.present? %>
-              <%= image_tag current_customer.image, class: "img-circle", alt: "User Image", size: '25x25' %>
+            <% if current_admin.image.present? %>
+              <%= image_tag current_admin.image, class: "img-circle", alt: "User Image", size: '25x25' %>
             <% else %>
               <%= image_tag 'common/profile.svg', class: "img-circle", alt: "User Image", size: '25x25' %>
             <% end %>
-            <span class="hidden-xs"><%= current_customer.name %></span>
+            <span class="hidden-xs"><%= current_admin.name %></span>
           </a>
           <ul class="dropdown-menu">
             <li class="user-header">
-              <% if current_customer.image.present? %>
-                <%= image_tag current_customer.image, class: "img-circle", alt: "User Image", size: '90x90' %>
+              <% if current_admin.image.present? %>
+                <%= image_tag current_admin.image, class: "img-circle", alt: "User Image", size: '90x90' %>
               <% else %>
                 <%= image_tag 'common/profile.svg', class: "img-circle", alt: "User Image", size: '90x90' %>
               <% end %>
@@ -45,7 +45,7 @@
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="pull-right">
-                <%= link_to 'Sign out', destroy_customer_session_path, method: 'delete', class: 'btn btn-default btn-flat' %>
+                <%= link_to 'Sign out', destroy_admin_session_path, method: 'delete', class: 'btn btn-default btn-flat' %>
               </div>
             </li>
           </ul>

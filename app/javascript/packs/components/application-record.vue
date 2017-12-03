@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-bordered table-hover">
+  <table class="table table-bordered table-hover bg-white">
     <tbody>
       <tr>
         <th class="w5p">&nbsp;</th>
@@ -10,8 +10,8 @@
         <th class="">&nbsp;</th>
       </tr>
       <template v-for="(col, index) in application_list">
-        <tr :key="col.id" v-on:click="open_info(index)">
-          <td class="text-center">
+        <tr :key="col.id">
+          <td class="text-center" v-on:click="open_info(index)">
             <i class="fa"
                :class="{'fa-plus':collapsed[index], 'fa-minus':!collapsed[index]}"
                aria-hidden="true"></i>

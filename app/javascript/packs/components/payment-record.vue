@@ -1,6 +1,6 @@
 <template>
   <div class='accordion p10'>
-    <h3 class="bg-white text-center w280 m-center lh50 mt20 mb10 row">
+    <h3 class="bg-white text-center w300 m-center lh50 mt20 mb10 row">
       <span class="c-p col-md-2" v-on:click="update_date(-1)">◀</span>
       <span class="col-md-8">{{current_month.getFullYear()}}年{{current_month.getMonth()+1}}月</span>
       <span class="c-p col-md-2" v-on:click="update_date(1)" v-if="!older_than_current_month()">▶</span>
@@ -12,7 +12,7 @@
             <th scope="col" class="w150">日付</th>
             <th scope="col">給与</th>
             <th scope="col">Payment?</th>
-            <th scope="col">　</th>
+            <th scope="col">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
@@ -73,7 +73,7 @@
     methods: {
       update_date: function(increment) {
         var vm = this;
-        let diff = vm.month_diff + increment;
+        // let diff = vm.month_diff + increment;
         vm.current_month = new Date(vm.current_month.setMonth(vm.current_month.getMonth() + increment));
       },
       older_than_current_month: function() {

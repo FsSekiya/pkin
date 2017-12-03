@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:hisea/devise-bootstrap-views.git
+  revision: 34e2c7b5d5c22295a2cea4265c4f31deba29be18
+  branch: bootstrap4
+  specs:
+    devise-bootstrap-views (1.0.0.alpha1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -73,7 +80,6 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
-    devise-bootstrap-views (0.0.11)
     devise_token_auth (0.1.42)
       devise (> 3.5.2, <= 4.3)
       rails (< 6)
@@ -271,7 +277,7 @@ DEPENDENCIES
   brakeman
   byebug
   devise
-  devise-bootstrap-views
+  devise-bootstrap-views!
   devise_token_auth
   dotenv-rails
   email_validator

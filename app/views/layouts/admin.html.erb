@@ -7,21 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <%= javascript_include_tag 'customer' %>
-    <%= javascript_pack_tag 'customer' %>
-    <%= stylesheet_link_tag 'customer', media: 'all' %>
+    <%= javascript_include_tag 'admin' %>
+    <%= javascript_pack_tag 'admin' %>
+    <%= stylesheet_link_tag 'admin', media: 'all' %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   </head>
-  <body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
+  <body class="skin-yellow sidebar-mini" style="height: auto; min-height: 100%;">
     <%= render partial: 'shared/flash' %>
     <div class="wrapper" style="height: auto; min-height: 100%;" id="customer-main">
-      <%= render partial: 'customer/shared/header' %>
-      <%= render partial: 'customer/shared/aside' %>
+      <%= render partial: 'admin/shared/header' %>
+      <%= render partial: 'admin/shared/aside' %>
       <div class="content-wrapper" style="min-height: 960px;">
         <%= yield %>
       </div>
-      <%= render partial: 'customer/shared/footer' %>
+      <%= render partial: 'admin/shared/footer' %>
     </div>
   </body>
 </html>

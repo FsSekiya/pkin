@@ -21,6 +21,7 @@
   },
   "rules": {
     "vue/valid-v-if": "error",
+    "vue/require-v-for-key": false,
     "no-unused-vars": [
       2,
       {"argsIgnorePattern": "^_"}

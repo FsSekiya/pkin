@@ -23,8 +23,8 @@
           <td colspan="4">
             <worker-basic-info :worker='current_worker'></worker-basic-info>
             <div class="clearfix mt20 p10">
-              <button type="button" v-on:click="show_payment_records" class="btn btn-secondary col-md-4 col-md-offset-1">前払金ログ</button>
-              <button type="button" v-on:click="show_worker_records" class="btn btn-primary col-md-4 col-md-offset-2">出席ログ</button>
+              <button type="button" v-on:click="show_payment_records" class="btn btn-secondary col-4 offset-1">前払金ログ</button>
+              <button type="button" v-on:click="show_worker_records" class="btn btn-primary col-4 offset-2">出席ログ</button>
             </div>
             <span id="working_records_span" v-if="workerRecordsActive">
                 <working-record :working-records='working_records'

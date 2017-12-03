@@ -23,7 +23,7 @@ gem 'kaminari'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'
-gem 'devise-bootstrap-views'
+gem 'devise-bootstrap-views', git: 'git@github.com:hisea/devise-bootstrap-views.git', branch: 'bootstrap4'
 
 # クロスドメイン対策のgem
 gem 'rack-cors'

@@ -6,6 +6,14 @@ Rails.application.routes.draw do
     root to: 'customer/sessions#new'
   end
 
+  devise_for :admin, controllers: {
+    sessions: 'admin/sessions'
+  }, skip: %i[registration passwords], class_name: 'Admin'
+
+  namespace :admin do
+    resources :dashboard
+  end
+
   namespace :customer do
     resources :dashboard
     resources :branch, only: %i[show]

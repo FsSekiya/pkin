@@ -1,6 +1,6 @@
 <template>
   <div class='accordion p10'>
-    <h3 class="bg-white text-center w280 m-center lh50 mt20 mb10 row">
+    <h3 class="bg-white text-center w300 m-center lh50 mt20 mb10 row">
       <span class="c-p col-md-2" v-on:click="update_date(-1)">◀</span>
       <span class="col-md-8">{{current_month.getFullYear()}}年{{current_month.getMonth()+1}}月</span>
       <span class="c-p col-md-2" v-on:click="update_date(1)" v-if="!older_than_current_month()">▶</span>
@@ -13,7 +13,7 @@
             <th scope="col">出勤</th>
             <th scope="col">退勤</th>
             <th scope="col">給与</th>
-            <th scope="col">　</th>
+            <th scope="col">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
@@ -29,35 +29,34 @@
         </tbody>
       </table>
     </div>
-    <bootstrap-modal ref="working_record_edit"
-                     :need-header="true"
-                     :need-footer="false"
-                     :size="'large'">
-      <div slot="title">
+    <b-modal ref="working_record_edit"
+                     :hide-footer=true
+                     :size="'lg'">
+      <div slot="modal-title">
         {{ modal_worker.name }}さんの{{modal_data.record_date}}の記録を修正する
       </div>
-      <div slot="body">
-        <div class="content" ref="workingRecord">
+      <div>
+        <div class="content">
           <div class="form-group row">
-            <label for="example-text-input" class="col-md-2 col-form-label mt5">開始時刻</label>
-            <div class="col-md-10">
+            <label for="example-text-input" class="col-4  offset-2  col-form-label mt5">開始時刻</label>
+            <div class="col-6">
               <vue-timepicker :minute-interval='1' v-model="modal_data.start_time"></vue-timepicker>
             </div>
           </div>
           <div class="form-group row">
-            <label for="example-text-input" class="col-md-2 col-form-label mt5">終了時刻</label>
-            <div class="col-md-10">
+            <label for="example-text-input" class="col-4 offset-2 col-form-label mt5">終了時刻</label>
+            <div class="col-6">
               <vue-timepicker :minute-interval='1' v-model="modal_data.finish_time"></vue-timepicker>
             </div>
           </div>
-          <div class="form-group row">
-            <button type="submit" class="btn btn-warning col-md-4 col-md-offset-4" @click="update_working_record">送信</button>
+          <div class="form-group row my-4">
+            <button type="submit" class="btn btn-warning col-4 offset-4" @click="update_working_record">送信</button>
           </div>
         </div>
       </div>
-      <div slot="footer">
+      <div slot="modal-footer">
       </div>
-    </bootstrap-modal>
+    </b-modal>
   </div>
 </template>
 
@@ -155,7 +154,7 @@
 
                  this.$refs.working_record_edit.close()
                  alert(data.message)
-               },({error, response}) => {
+               },({_error, response}) => {
                  alert(response.data.message)
                }).catch(() => {})
       },
@@ -171,7 +170,7 @@
         vm.$set(vm.modal_data, 'start_time', {'HH': start_time[0], 'mm': start_time[1]})
         vm.$set(vm.modal_data, 'finish_time', {'HH': finish_time[0], 'mm': finish_time[1]})
 
-        this.$refs.working_record_edit.open()
+        this.$refs.working_record_edit.show()
       }
     }
   }
