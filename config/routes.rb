@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       resources :working_record, only: [] do
         collection do
           get :amount
+          get :paid_amounts
           post :start
           post :finish
         end
