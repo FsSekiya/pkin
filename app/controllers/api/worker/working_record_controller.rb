@@ -13,6 +13,10 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
     end
 
     ret = {
+      'applicable_amount_entry' => {
+        'field' => '申請可能額',
+        'value' => "¥#{10_000.to_s(:delimited)}-"
+      },
       'accordion_cells' => [
         {'level' => 0,
          'field' => '累計労働時間',
