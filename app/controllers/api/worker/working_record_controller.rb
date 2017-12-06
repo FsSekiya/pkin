@@ -5,9 +5,6 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
 
   def paid_amounts
     diff_raw = params['diff']
-
-    p diff_raw
-
     unless diff_raw
       render(json: { error: '500 error' }, status: 500) && return
     end
