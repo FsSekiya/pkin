@@ -11,8 +11,8 @@ class Api::Worker::ApplicationStatusController < Api::Worker::ApplicationControl
     end
     ret = {
       'summary' => {
-        'field' => '合計申請額',
-        'value' => "¥#{10_000.to_s(:delimited)}-"
+        'field' => '合計申請金額',
+        'value' => "¥#{12_345.to_s(:delimited)}-"
       }, 'entries' => [
         {
           'time' => '2017/10/10 10:10:10',
