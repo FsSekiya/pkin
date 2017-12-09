@@ -14,32 +14,15 @@
     </div>
     <ul class="sidebar-menu tree" data-widget="tree">
       <li class="header">選択してください</li>
-      <li class="treeview <%= 'active menu-open' if controller_name == 'branch' %>">
-        <a href="#">
-          <i class="fa fa-male"></i> <span>WORKER</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-        </ul>
-      </li>
-      <li class="treeview <%= 'active menu-open' if controller_name == 'apply' %>">
-        <a href="#">
-          <i class="fa fa-file"></i>
-          <span>RECORD</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li>
-          </li>
-        </ul>
+      <li>
+        <%= link_to admin_apply_index_path do %>
+          <i class="fa fa-male"></i> <span>振込</span>
+        <% end %>
       </li>
       <li>
-        <i class="fa fa-cog"></i>
-        <span>SETTING</span>
+        <%= link_to admin_customer_index_path do %>
+          <i class="fa fa-male"></i> <span>契約企業</span>
+        <% end %>
       </li>
     </ul>
   </section>

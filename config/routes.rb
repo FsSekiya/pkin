@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :dashboard
+    resources :apply, only: %i[index]
+    resources :customer, only: %i[index]
   end
 
   namespace :customer do

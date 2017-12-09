@@ -8,21 +8,16 @@
 
 
 import Vue from 'vue/dist/vue.esm'
-import WorkerAccordion from './components/worker-accordion.vue'
-import ApplicationRecord from './components/application-record.vue'
-import 'chart.js'
-import 'hchs-vue-charts'
+import BootstrapVue from 'bootstrap-vue'
 
+Vue.use(BootstrapVue)
 document.addEventListener('DOMContentLoaded', () => {
-  Vue.use(window.VueCharts)
   const app = new Vue({
     el: '#customer-main',
     data: {
       message: "Can you say hello?",
     },
     components: {
-      WorkerAccordion,
-      ApplicationRecord,
     }
   })
 })

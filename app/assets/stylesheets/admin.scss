@@ -46,22 +46,3 @@
     margin: 5px;
     border: 1px rgb(218, 218, 218) solid;
 }
-
-table {
-  width: 100%;
-  border-collapse: separate;
-  /* border-spacing: 5px 12px; */
-  /* padding: 0 8px 8px 0; */
-}
-td {
-  height: 40px;
-  vertical-align: middle;
-  border-bottom: 2px solid #ddd;
-  border-top: unset;
-  border-left: unset;
-  border-right: unset;
-}
-
-.border {
-  border: 2px solid #ddd;
-}
