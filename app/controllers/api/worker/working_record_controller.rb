@@ -1,5 +1,9 @@
 class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
+
+  before_action :authenticate_api!
+
   def amount
+    # p current_api_worker
     render json: { amount: "¥#{10_000.to_s(:delimited)}-" }
   end
 
