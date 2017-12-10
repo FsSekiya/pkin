@@ -26,23 +26,15 @@
               100,000
             </td>
             <td>
-              <span class="btn btn-warning">ダウンロード</span>
+              <%= link_to csv_admin_apply_index_path, class: 'btn btn-warning' do %>
+                ダウンロード
+              <% end %>
             </td>
             <td class="align-middle">
-              100,000
+              <change-balance></change-balance>
             </td>
             <td>
-              <span class="btn btn-primary">残高変更</span></td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  未振込
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">未振込</a>
-                  <a class="dropdown-item" href="#">振込済み</a>
-                </div>
-              </div>
+              <apply-status-select></apply-status-select>
             </td>
           </tr>
         </table>
