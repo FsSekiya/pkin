@@ -3,9 +3,8 @@ class Customer::ApplicationController < ApplicationController
   before_action :authenticate
   layout 'customer'
 
-  protected
-
   def authenticate
     redirect_to root_path unless customer_signed_in?
+    @admin_login = true if admin_signed_in? || session[:admin_login]
   end
 end

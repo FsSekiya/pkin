@@ -17,7 +17,11 @@ Rails.application.routes.draw do
         get :csv
       end
     end
-    resources :customer, only: %i[index]
+    resources :customer, only: %i[index] do
+      member do
+        get :login_customer
+      end
+    end
   end
 
   namespace :customer do

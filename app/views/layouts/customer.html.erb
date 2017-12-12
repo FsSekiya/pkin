@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   </head>
   <body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
+    <% if @admin_login %>
+      <div class="show alert alert-info m0 br0 text-center">
+        管理者として<%= current_customer.name %>様にログインしています
+      </div>
+    <% end %>
     <%= render partial: 'shared/flash' %>
     <div class="wrapper" style="height: auto; min-height: 100%;" id="customer-main">
       <%= render partial: 'customer/shared/header' %>

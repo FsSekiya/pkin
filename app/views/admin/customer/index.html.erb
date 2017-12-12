@@ -14,7 +14,7 @@
     <div class="col-12 col-md-4 mb-2">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
-        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" name="query">
+        <input type="text" class="form-control" placeholder="企業名" name="query">
       </div>
     </div>
     <div class="col-6 col-md-1 mb-2">
@@ -32,7 +32,7 @@
           <% @companies.each do |company| %>
             <tr>
               <td><%= company.name %></td>
-              <td><%= link_to "この企業のアカウントでログイン", '#' %></td>
+              <td><%= link_to "この企業のアカウントでログイン", login_customer_admin_customer_path(company.id) %></td>
             </tr>
           <% end %>
         </table>
