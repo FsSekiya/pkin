@@ -10,17 +10,17 @@
 
 <section class="content">
 
-  <div class="form-row align-items-center mb-2">
+  <%= form_tag admin_customer_index_path, class: "form-row align-items-center mb-2", method: "get" do %>
     <div class="col-12 col-md-4 mb-2">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
-        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" name="query">
       </div>
     </div>
     <div class="col-6 col-md-1 mb-2">
       <button type="submit" class="btn btn-primary">検索</button>
     </div>
-  </div>
+  <% end %>
   <div class="row">
     <div class="col-12">
       <div class="box">
@@ -29,18 +29,12 @@
             <th>企業名</th>
             <th>　</th>
           </tr>
-          <tr>
-            <td>鈴木商店</td>
-            <td><%= link_to "この企業のアカウントでログイン", '#' %></td>
-          </tr>
-          <tr>
-            <td>佐藤ストア</td>
-            <td><%= link_to "この企業のアカウントでログイン", '#' %></td>
-          </tr>
-          <tr>
-            <td>北島コーヒー</td>
-            <td><%= link_to "この企業のアカウントでログイン", '#' %></td>
-          </tr>
+          <% @companies.each do |company| %>
+            <tr>
+              <td><%= company.name %></td>
+              <td><%= link_to "この企業のアカウントでログイン", '#' %></td>
+            </tr>
+          <% end %>
         </table>
       </div>
     </div>
