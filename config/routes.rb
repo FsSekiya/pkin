@@ -30,12 +30,12 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: { format: :json } do
-    mount_devise_token_auth_for 'Worker', at: 'auth',
-                                only: %i[sign_in sign_out session],
-                                controllers: {
-                                  sessions: 'api/worker/sessions'
-                                }, skip: %i[registration passwords]
     namespace :worker do
+      mount_devise_token_auth_for 'Worker', at: 'auth',
+                                            only: %i[sign_in sign_out session],
+                                            controllers: {
+                                              sessions: 'api/worker/sessions'
+                                            }, skip: %i[registration passwords]
       resources :working_record, only: [] do
         collection do
           get :amount
