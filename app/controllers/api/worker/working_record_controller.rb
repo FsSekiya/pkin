@@ -1,5 +1,4 @@
 class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
-
   before_action :authenticate_api!
 
   def amount
