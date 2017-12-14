@@ -1,3 +1,3 @@
 class Api::Worker::ApplicationController < Api::ApplicationController
-  devise_group :worker, contains: [:worker]
+  devise_token_auth_group :api, contains: [:api_worker_worker]
 end
