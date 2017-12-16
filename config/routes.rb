@@ -55,6 +55,12 @@ Rails.application.routes.draw do
           get :application_status
         end
       end
+
+      resources :apply, only: [] do
+        collection do
+          post :create
+        end
+      end
     end
 
     namespace :qr do

@@ -79,6 +79,27 @@ ActiveRecord::Schema.define(version: 20171216031115) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type"
+    t.integer "status"
+    t.integer "amount"
+    t.bigint "worker_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "payment_date"
+    t.index ["worker_id"], name: "index_payments_on_worker_id"
+  end
+
+  create_table "prepayment_applications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "amount", null: false
+    t.bigint "worker_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "payment_id"
+    t.index ["payment_id"], name: "index_prepayment_applications_on_payment_id"
+    t.index ["worker_id"], name: "index_prepayment_applications_on_worker_id"
+  end
+
   create_table "versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "item_type", limit: 191, null: false
     t.integer "item_id", null: false
@@ -87,6 +108,15 @@ ActiveRecord::Schema.define(version: 20171216031115) do
     t.text "object", limit: 4294967295
     t.datetime "created_at"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
+  create_table "work_monthly_summaries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "summary_start_date"
+    t.date "summary_end_date"
+    t.bigint "monthly_payment_id"
+    t.index ["monthly_payment_id"], name: "index_work_monthly_summaries_on_monthly_payment_id"
   end
 
   create_table "workers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -136,6 +166,10 @@ ActiveRecord::Schema.define(version: 20171216031115) do
   add_foreign_key "branches", "companies"
   add_foreign_key "company_settings", "companies"
   add_foreign_key "customers", "companies"
+  add_foreign_key "payments", "workers"
+  add_foreign_key "prepayment_applications", "payments"
+  add_foreign_key "prepayment_applications", "workers"
+  add_foreign_key "work_monthly_summaries", "payments", column: "monthly_payment_id"
   add_foreign_key "workers", "branches"
   add_foreign_key "workers", "working_records", column: "current_working_record_id"
   add_foreign_key "working_records", "workers"
