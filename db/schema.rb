@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202163615) do
+ActiveRecord::Schema.define(version: 20171216031115) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "image", default: "", null: false
@@ -115,7 +115,9 @@ ActiveRecord::Schema.define(version: 20171202163615) do
     t.string "phone_number"
     t.date "birthday"
     t.string "bank_account"
+    t.bigint "current_working_record_id"
     t.index ["branch_id"], name: "index_workers_on_branch_id"
+    t.index ["current_working_record_id"], name: "index_workers_on_current_working_record_id"
     t.index ["reset_password_token"], name: "index_workers_on_reset_password_token", unique: true
     t.index ["uid"], name: "index_workers_on_uid", unique: true
   end
@@ -135,5 +137,6 @@ ActiveRecord::Schema.define(version: 20171202163615) do
   add_foreign_key "company_settings", "companies"
   add_foreign_key "customers", "companies"
   add_foreign_key "workers", "branches"
+  add_foreign_key "workers", "working_records", column: "current_working_record_id"
   add_foreign_key "working_records", "workers"
 end

@@ -7,6 +7,7 @@ class WorkingRecordSerializer < ActiveModel::Serializer
   end
 
   def finish_time
+    return nil unless object.finish_at
     if object.start_at.strftime('%m%d') < object.finish_at.strftime('%m%d')
       "#{object.finish_at.hour + 24}:#{object.finish_at.strftime('%M')}"
     else

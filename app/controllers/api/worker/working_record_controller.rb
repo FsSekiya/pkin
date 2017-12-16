@@ -1,9 +1,34 @@
 class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_api!
 
   def amount
     # p current_api_worker_worker
     render json: { amount: "¥#{10_000.to_s(:delimited)}-" }
+  end
+
+  # 2017/12/16 Yuki-Inoue:
+  # routes から参照するメソッドに ? って付与できるんでしたっけ？
+  # なんか気持ち悪いので、 `working?` に変更しろと叱ってくるチェックを
+  # disable します。
+  #
+  # rubocop:disable Naming/PredicateName
+  def is_working
+    worker = current_api_worker_worker
+    render json: { bool_value: worker.working? }
+  end
+  # rubocop:enable Naming/PredicateName
+
+  def start
+    worker = current_api_worker_worker
+    result_working_record = worker.start_work!
+    render json: result_working_record
+  end
+
+  def finish
+    worker = current_api_worker_worker
+    result_working_record = worker.finish_work!
+    render json: result_working_record
   end
 
   def paid_amounts

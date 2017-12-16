@@ -10,7 +10,7 @@ class Admin::CustomerController < Admin::ApplicationController
   end
 
   def login_customer
-    sign_in Customer.find(params[:id]), scope: :admin
+    sign_in Customer.unscoped.find(params[:id]), scope: :admin
     session[:admin_login] = true
     redirect_to customer_dashboard_index_path
   end
