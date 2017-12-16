@@ -7,4 +7,4 @@ deploy:
 
 .PHONY: lint
 lint:
-	bundle exec rubocop -a
+	bundle exec rubocop -D -a
