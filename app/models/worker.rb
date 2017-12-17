@@ -33,11 +33,11 @@ class Worker < ApplicationRecord
     Time.now.in_time_zone
   end
 
-  def start_work!
+  def start_work!(start_at)
     working_record = nil
     transaction do
       working_record = WorkingRecord.create(
-        start_at: Time.current,
+        start_at: start_at,
         hourly_pay: hourly_pay,
         worker: self
       )
@@ -47,10 +47,10 @@ class Worker < ApplicationRecord
     working_record
   end
 
-  def finish_work!
+  def finish_work!(finish_at)
     working_record = current_working_record
     transaction do
-      working_record.finish_at = Time.current
+      working_record.finish_at = finish_at
       working_record.calculate_payment
       working_record.save
       self.current_working_record = nil

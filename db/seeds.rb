@@ -23,10 +23,10 @@ CompanySetting.create(
   Company.create(name: ForgeryJa(:name).company_name)
 end
 
-5.times do
+5.times do |i|
   Branch.create(
     name: ForgeryJa(:address).city,
-    code: (0...5).map { o[rand(o.length)] }.join,
+    code: '1234' + i.to_s,
     company_id: company.id)
 end
 
@@ -41,7 +41,7 @@ name_forgery = ForgeryJa(:name)
 address_forgery = ForgeryJa(:address)
 mobile_forgery = ForgeryJa(:mobile)
 email_forgery = Forgery(:email)
-100.times do
+100.times do |i|
   entrance_date = calculate_random_entrance_date
   bank_account = (0...7).map { rand(10).to_s }.join
   Worker.create(
@@ -49,7 +49,7 @@ email_forgery = Forgery(:email)
     furigana: name_forgery.full_name(to: ForgeryJa::HIRA),
     password: '12341234',
     password_confirmation: '12341234',
-    uid: Branch.first.code + (0...5).map { o[rand(o.length)] }.join,
+    uid: Branch.first.code + (1234 + i).to_s,
     branch_id: Branch.first.id,
     hourly_pay: rand(8..13) * 100,
     address: address_forgery.full_address,

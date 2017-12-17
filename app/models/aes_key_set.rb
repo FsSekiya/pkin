@@ -1,0 +1,2 @@
+class AesKeySet < ApplicationRecord
+end

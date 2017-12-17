@@ -1,3 +1,6 @@
+require 'base64'
+require 'openssl'
+
 class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_api!
@@ -20,14 +23,18 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   # rubocop:enable Naming/PredicateName
 
   def start
+    # time_data.match?(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+0900$/)
+
     worker = current_api_worker_worker
-    result_working_record = worker.start_work!
+    result_working_record = worker.start_work!(Time.current)
     render json: result_working_record
   end
 
   def finish
+    # time_data.match?(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+0900$/)
+
     worker = current_api_worker_worker
-    result_working_record = worker.finish_work!
+    result_working_record = worker.finish_work!(Time.current)
     render json: result_working_record
   end
 
@@ -78,5 +85,23 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
     }
 
     render json: ret
+  end
+
+  private
+
+  def time_data
+    encrypted = Base64.decode64(params[:code])
+    cipher = OpenSSL::Cipher.new('aes-256-cbc')
+
+    aes_key = AesKeySet.last
+
+    cipher.padding = 1
+    cipher.key = aes_key.key
+    cipher.iv = aes_key.iv
+
+    decrypted = ''
+    decrypted << cipher.update(encrypted)
+    decrypted << cipher.final
+    decrypted
   end
 end
