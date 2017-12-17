@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  resources :static, only: [] do
+    collection do
+      get :help
+      get :notification
+      get :terms
+      get :privacy
+    end
+  end
+    
   devise_for :customer, controllers: {
     sessions: 'customer/sessions'
   }, skip: %i[registration passwords], class_name: 'Customer'
