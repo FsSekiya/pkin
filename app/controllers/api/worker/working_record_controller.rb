@@ -4,10 +4,14 @@ require 'openssl'
 class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def amount
+  def prepayable_amount
     worker = current_api_worker_worker
-    ret = worker.prepayable_amount
-    render json: { amount: "¥#{ret.to_s(:delimited)}-" }
+    worker.prepayable_amount
+  end
+
+  def amount
+    ret = prepayable_amount
+    render json: { amount: pretty_print_currency_amount(ret) }
   end
 
   # 2017/12/16 Yuki-Inoue:
@@ -39,51 +43,9 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   end
 
   def paid_amounts
-    diff_raw = params['diff']
+    diff_raw = params['diff'].to_i
     render(json: { error: '500 error' }, status: 500) && return unless diff_raw
-
-    ret = {
-      'applicable_amount_entry' => {
-        'field' => '申請可能額',
-        'value' => "¥#{10_000.to_s(:delimited)}-"
-      },
-      'accordion_cells' => [
-        { 'level' => 0,
-          'field' => '累計労働時間',
-          'value' => '000時間' },
-        { 'level' => 1,
-          'field' => '2017/11/10',
-          'value' => '1.5 時間' },
-        { 'level' => 1,
-          'field' => '2017/11/09',
-          'value' => '7.5 時間' },
-        { 'level' => 0,
-          'field' => '累計給与額',
-          'value' => '¥30,000' },
-        { 'level' => 1,
-          'field' => '2017/11/10',
-          'value' => '¥10,000' },
-        { 'level' => 1,
-          'field' => '2017/11/09',
-          'value' => '¥20,000' },
-        { 'level' => 0,
-          'field' => '支払済み額',
-          'value' => '¥30,000' },
-        { 'level' => 1,
-          'field' => '2017/11/08',
-          'value' => '¥8,000' },
-        { 'level' => 1,
-          'field' => '2017/11/07',
-          'value' => '¥12,000' },
-        { 'level' => 0,
-          'field' => '次回支給見込額',
-          'value' => '¥20,000' },
-        { 'level' => 0,
-          'field' => '次回支給見込額',
-          'value' => '¥20,000' }
-      ]
-    }
-
+    ret = compute_paid_amounts_responce(diff_raw)
     render json: ret
   end
 
@@ -104,4 +66,71 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
     decrypted << cipher.final
     decrypted
   end
+
+  def pretty_print_currency_amount(amount, tailer: '')
+    "¥#{amount.to_i.to_s(:delimited)}#{tailer}"
+  end
+
+  # 2017/12/21 Yuki INOUE:
+  #   どうしても長くなってしまうので、 Metrics のチェックをオフにします。
+  #
+  # rubocop:disable Metrics/AbcSize
+  def compute_paid_amounts_responce(diff)
+    diff = diff.to_i
+
+    worker = current_api_worker_worker
+    iteration_summary = worker.iteration_summary(diff)
+
+    working_records = iteration_summary[:working_records]
+
+    cells = []
+    cells << { 'level' => 0,
+               'field' => '累計労働時間',
+               'value' => format('%03d時間', iteration_summary[:total_work_hours]) }
+
+    cells += working_records.map do |r|
+      { 'level' => 1,
+        'field' => r.start_at.strftime('%Y/%m/%d'),
+        'value' => format('%.1f時間', r.hours_worked) }
+    end
+
+    cells << { 'level' => 0,
+               'field' => '累計給与額',
+               'value' => pretty_print_currency_amount(iteration_summary[:total_salary]) }
+
+    cells += working_records.map do |r|
+      { 'level' => 1,
+        'field' => r.start_at.strftime('%Y/%m/%d'),
+        'value' => pretty_print_currency_amount(r.payment) }
+    end
+
+    prepayment_applications = iteration_summary[:prepayment_applications]
+    total_applied = iteration_summary[:total_applied]
+
+    cells << { 'level' => 0,
+               'field' => '支払済み額',
+               'value' => pretty_print_currency_amount(total_applied) }
+
+    cells += prepayment_applications.map do |a|
+      { 'level' => 1,
+        'field' => a.created_at.strftime('%Y/%m/%d'),
+        'value' => pretty_print_currency_amount(a.amount) }
+    end
+
+    salary_paid_normally = iteration_summary[:salary_paid_normally]
+
+    cells << { 'level' => 0,
+               'field' => '次回支給見込額',
+               'value' => pretty_print_currency_amount(salary_paid_normally) }
+
+    prepayable_amount = iteration_summary[:prepayable_amount]
+    {
+      'applicable_amount_entry' => {
+        'field' => '申請可能額',
+        'value' => pretty_print_currency_amount(prepayable_amount, tailer: '-')
+      },
+      'accordion_cells' => cells
+    }
+  end
+  # rubocop:enable Metrics/AbcSize
 end

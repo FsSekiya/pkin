@@ -16,7 +16,8 @@ CompanySetting.create(
   company_id: company.id,
   approve_auto_prepayment: 'auto_prepayment_approved',
   prepayment_allowed_percentage: rand(100),
-  wage_calculation_time_unit: 60
+  wage_calculation_time_unit: 60,
+  monthly_cut_off_date: 15
 )
 
 5.times do

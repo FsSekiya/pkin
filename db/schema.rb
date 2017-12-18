@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217000541) do
+ActiveRecord::Schema.define(version: 20171221015755) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "image", default: "", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20171217000541) do
     t.integer "wage_calculation_time_unit", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "monthly_cut_off_date"
     t.index ["company_id"], name: "index_company_settings_on_company_id"
   end
 
