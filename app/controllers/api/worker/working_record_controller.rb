@@ -6,8 +6,9 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   before_action :authenticate_api!
 
   def amount
-    # p current_api_worker_worker
-    render json: { amount: "¥#{10_000.to_s(:delimited)}-" }
+    worker = current_api_worker_worker
+    ret = worker.prepayable_amount
+    render json: { amount: "¥#{ret.to_s(:delimited)}-" }
   end
 
   # 2017/12/16 Yuki-Inoue:
