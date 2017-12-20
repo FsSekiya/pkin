@@ -3,7 +3,6 @@ require 'openssl'
 
 class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_api!
 
   def amount
     worker = current_api_worker_worker
