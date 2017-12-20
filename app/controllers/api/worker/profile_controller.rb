@@ -1,7 +1,6 @@
 
 class Api::Worker::ProfileController < Api::Worker::ApplicationController
   protect_from_forgery with: :null_session
-  before_action :authenticate_api!
 
   def profile
     worker = current_api_worker_worker
