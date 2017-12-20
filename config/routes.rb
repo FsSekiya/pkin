@@ -71,6 +71,12 @@ Rails.application.routes.draw do
           post :create
         end
       end
+
+      resources :profile, only: [] do
+        collection do
+          get :profile
+        end
+      end
     end
 
     namespace :qr do
