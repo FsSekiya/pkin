@@ -70,21 +70,6 @@ class Worker < ApplicationRecord
     PrepaymentApplication.create(amount: amount, worker: self)
   end
 
-  def unpaid_amount
-    last_regular_deadline_date = last_settlement_date
-
-    prepayment_apps = PrepaymentApplication.where(worker: self)
-    prepayment_apps = prepayment_apps.where('created_at > ?', last_regular_deadline_date) if last_regular_deadline_date
-
-    working_records = WorkingRecord.where(worker: self).where.not(finish_at: nil)
-    working_records = working_records.where('created_at > ?', last_regular_deadline_date) if last_regular_deadline_date
-
-    current_applied_amount = prepayment_apps.pluck(:amount).sum
-    total_to_be_earned = working_records.pluck(:payment).sum
-
-    total_to_be_earned - current_applied_amount
-  end
-
   def iteration_summary(diff)
     working_records = self.working_records
                           .where(start_at: company.salary_iteration(diff))
