@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221015755) do
+ActiveRecord::Schema.define(version: 20171221050655) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "image", default: "", null: false
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20171221015755) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "payment_id"
+    t.boolean "rejected", default: false, null: false
     t.index ["payment_id"], name: "index_prepayment_applications_on_payment_id"
     t.index ["worker_id"], name: "index_prepayment_applications_on_worker_id"
   end
