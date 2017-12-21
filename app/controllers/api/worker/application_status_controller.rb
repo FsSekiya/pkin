@@ -6,7 +6,7 @@ class Api::Worker::ApplicationStatusController < Api::Worker::ApplicationControl
     render(json: { error: '500 error' }, status: 500) && return unless diff_raw
 
     worker = current_api_worker_worker
-    prepayment_applications = worker.prepayment_applications_of_iteration(diff_raw)
+    prepayment_applications = worker.prepayment_applications_of_iteration(diff_raw).order(:created_at)
 
     total_amount = prepayment_applications
                    .reject { |a| a.status == :rejected }
