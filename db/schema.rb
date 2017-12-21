@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221050655) do
+ActiveRecord::Schema.define(version: 20171221065749) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "image", default: "", null: false
@@ -103,9 +103,9 @@ ActiveRecord::Schema.define(version: 20171221050655) do
     t.bigint "worker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "payment_id"
     t.boolean "rejected", default: false, null: false
-    t.index ["payment_id"], name: "index_prepayment_applications_on_payment_id"
+    t.bigint "prepayment_id"
+    t.index ["prepayment_id"], name: "index_prepayment_applications_on_prepayment_id"
     t.index ["worker_id"], name: "index_prepayment_applications_on_worker_id"
   end
 
@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 20171221050655) do
   add_foreign_key "company_settings", "companies"
   add_foreign_key "customers", "companies"
   add_foreign_key "payments", "workers"
-  add_foreign_key "prepayment_applications", "payments"
+  add_foreign_key "prepayment_applications", "payments", column: "prepayment_id"
   add_foreign_key "prepayment_applications", "workers"
   add_foreign_key "work_monthly_summaries", "payments", column: "monthly_payment_id"
   add_foreign_key "workers", "branches"
