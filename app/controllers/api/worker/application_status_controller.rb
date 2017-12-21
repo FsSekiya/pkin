@@ -4,27 +4,25 @@ class Api::Worker::ApplicationStatusController < Api::Worker::ApplicationControl
   def application_status
     diff_raw = params['diff']
     render(json: { error: '500 error' }, status: 500) && return unless diff_raw
+
+    worker = current_api_worker_worker
+    prepayment_applications = worker.prepayment_applications_of_iteration(diff_raw)
+
+    total_amount = prepayment_applications
+                   .reject { |a| a.status == :rejected }
+                   .map(&:amount).sum
+
+    cells = prepayment_applications.map do |a|
+      { 'time' => a.created_at.strftime('%Y/%m/%d %H:%M:%S'),
+        'applied' => pretty_print_currency_amount(a.amount),
+        'status' => a.status.to_s }
+    end
+
     ret = {
       'summary' => {
         'field' => '合計申請金額',
-        'value' => "¥#{12_345.to_s(:delimited)}-"
-      }, 'entries' => [
-        {
-          'time' => '2017/10/10 10:10:10',
-          'applied' => "¥#{2_000.to_s(:delimited)}",
-          'status' => 'approved'
-        },
-        {
-          'time' => '2017/10/09 10:10:10',
-          'applied' => "¥#{1_000.to_s(:delimited)}",
-          'status' => 'waiting'
-        },
-        {
-          'time' => '2017/10/08 10:10:10',
-          'applied' => "¥#{3_000.to_s(:delimited)}",
-          'status' => 'rejected'
-        }
-      ]
+        'value' => pretty_print_currency_amount(total_amount, tailer: '-')
+      }, 'entries' => cells
     }
 
     render json: ret

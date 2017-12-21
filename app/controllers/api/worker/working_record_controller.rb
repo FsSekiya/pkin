@@ -67,10 +67,6 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
     decrypted
   end
 
-  def pretty_print_currency_amount(amount, tailer: '')
-    "¥#{amount.to_i.to_s(:delimited)}#{tailer}"
-  end
-
   # 2017/12/21 Yuki INOUE:
   #   どうしても長くなってしまうので、 Metrics のチェックをオフにします。
   #

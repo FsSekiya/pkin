@@ -71,17 +71,15 @@ class Worker < ApplicationRecord
   end
 
   def iteration_summary(diff)
-    working_records = self.working_records
-                          .where(start_at: company.salary_iteration(diff))
-                          .where.not(finish_at: nil)
-                          .order(:start_at)
+    working_records = working_records_of_iteration(diff)
+                      .where.not(finish_at: nil)
+                      .order(:start_at)
 
     total_work_hours = working_records.map(&:hours_worked).sum
     total_salary = working_records.map(&:payment).sum
 
-    prepayment_applications = self.prepayment_applications
-                                  .where(created_at: company.salary_iteration(diff))
-                                  .order(:created_at)
+    prepayment_applications =
+      prepayment_applications_of_iteration(diff).order(:created_at)
     total_applied = prepayment_applications.map(&:amount).sum
 
     salary_paid_normally = total_salary - total_applied
@@ -94,5 +92,14 @@ class Worker < ApplicationRecord
       total_applied: total_applied,
       salary_paid_normally: salary_paid_normally,
       prepayable_amount: prepayable_amount }
+  end
+
+  def prepayment_applications_of_iteration(iteration_offset)
+    prepayment_applications
+      .where(created_at: company.salary_iteration(iteration_offset))
+  end
+
+  def working_records_of_iteration(iteration_offset)
+    working_records.where(start_at: company.salary_iteration(iteration_offset))
   end
 end

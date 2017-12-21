@@ -16,6 +16,7 @@ class Company < ApplicationRecord
   end
 
   def salary_iteration(offset)
+    offset = offset.to_i
     d = next_cut_off_date
     d += offset.months
     d.prev_month.next_day..d
