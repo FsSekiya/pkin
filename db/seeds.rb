@@ -76,7 +76,7 @@ end
 
 Worker.all.each do |worker|
   50.times do
-    num_apps = rand(0..3)
+    num_apps = rand(1..3)
     apps = (0...num_apps).map do
       date = Faker::Time.between(DateTime.now - 4.month, DateTime.now)
       amount = rand(100..1000)
