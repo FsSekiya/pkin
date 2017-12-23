@@ -72,10 +72,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :profile, only: [] do
-        collection do
-          get :profile
-        end
+      resources :profile, only: [:index] do
       end
     end
 

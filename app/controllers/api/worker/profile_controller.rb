@@ -2,7 +2,7 @@
 class Api::Worker::ProfileController < Api::Worker::ApplicationController
   protect_from_forgery with: :null_session
 
-  def profile
+  def index
     worker = current_api_worker_worker
 
     # TODO: bank_info のデータをどう保持するか決める
