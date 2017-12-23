@@ -7,6 +7,7 @@ class Worker < ApplicationRecord
 
   belongs_to :branch
   has_many :working_records, dependent: :destroy
+  has_many :prepayment_applications, dependent: :destroy
   belongs_to :current_working_record, class_name: 'WorkingRecord', optional: true
 
   delegate :company, to: :branch
@@ -59,35 +60,46 @@ class Worker < ApplicationRecord
     working_record
   end
 
+  def prepayable_amount
+    iteration_summary(0)[:prepayable_amount]
+  end
+
   def apply_prepayment(amount)
     amount = amount.to_i
-    if prepayable_amount * (company.prepayment_allowed_percentage / 100.0) < amount
-      raise 'prepayment not allowed'
-    end
+    raise 'prepayment not allowed' if prepayable_amount < amount
     PrepaymentApplication.create(amount: amount, worker: self)
   end
 
-  def last_settlement_date
-    latest_paid_summary =
-      WorkMonthlySummary.joins(:monthly_payment)
-                        .order(summary_end_date: :desc)
-                        .first
+  def iteration_summary(diff)
+    working_records = working_records_of_iteration(diff)
+                      .where.not(finish_at: nil)
+                      .order(:start_at)
 
-    latest_paid_summary&.summary_end_date
+    total_work_hours = working_records.map(&:hours_worked).sum
+    total_salary = working_records.map(&:payment).sum
+
+    prepayment_applications =
+      prepayment_applications_of_iteration(diff).order(:created_at)
+    total_applied = prepayment_applications.map(&:amount).sum
+
+    salary_paid_normally = total_salary - total_applied
+    prepayable_amount = salary_paid_normally * (company.prepayment_allowed_percentage / 100.0)
+
+    { working_records: working_records,
+      prepayment_applications: prepayment_applications,
+      total_work_hours: total_work_hours,
+      total_salary: total_salary,
+      total_applied: total_applied,
+      salary_paid_normally: salary_paid_normally,
+      prepayable_amount: prepayable_amount }
   end
 
-  def prepayable_amount
-    last_regular_deadline_date = last_settlement_date
+  def prepayment_applications_of_iteration(iteration_offset)
+    prepayment_applications
+      .where(created_at: company.salary_iteration(iteration_offset))
+  end
 
-    prepayment_apps = PrepaymentApplication.where(worker: self)
-    prepayment_apps = prepayment_apps.where('created_at > ?', last_regular_deadline_date) if last_regular_deadline_date
-
-    working_records = WorkingRecord.where(worker: self)
-    working_records = working_records.where('created_at > ?', last_regular_deadline_date) if last_regular_deadline_date
-
-    current_applied_amount = prepayment_apps.pluck(:amount).sum
-    total_to_be_earned = working_records.pluck(:payment).sum
-
-    total_to_be_earned - current_applied_amount
+  def working_records_of_iteration(iteration_offset)
+    working_records.where(start_at: company.salary_iteration(iteration_offset))
   end
 end

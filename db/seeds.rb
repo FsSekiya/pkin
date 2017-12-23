@@ -16,7 +16,8 @@ CompanySetting.create(
   company_id: company.id,
   approve_auto_prepayment: 'auto_prepayment_approved',
   prepayment_allowed_percentage: rand(100),
-  wage_calculation_time_unit: 60
+  wage_calculation_time_unit: 60,
+  monthly_cut_off_date: 15
 )
 
 5.times do
@@ -70,6 +71,22 @@ Worker.all.each do |worker|
                          hourly_pay: worker.hourly_pay,
                          payment: (worker.hourly_pay.to_i * (working_time / 3600.0).round(2)).to_i
                         )
+  end
+end
+
+Worker.all.each do |worker|
+  50.times do
+    num_apps = rand(1..3)
+    apps = (0...num_apps).map do
+      date = Faker::Time.between(DateTime.now - 4.month, DateTime.now)
+      amount = rand(100..1000)
+      PrepaymentApplication.create(
+        worker: worker,
+        created_at: date,
+        amount: amount
+      )
+    end
+    Prepayment.create(worker: worker, prepayment_applications: apps)
   end
 end
 
