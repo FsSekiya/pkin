@@ -1,7 +1,7 @@
 namespace :cron do
   namespace :ase_key do
     task generate: :environment do
-      AseKeySet.create(key: SecureRandom.hex(64), iv: SecureRandom.hex(12))
+      AesKeySet.create(key: SecureRandom.hex(16), iv: SecureRandom.hex(8))
     end
   end
 end
