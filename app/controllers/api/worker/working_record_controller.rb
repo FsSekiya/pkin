@@ -27,19 +27,27 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   # rubocop:enable Naming/PredicateName
 
   def start
-    # time_data.match?(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+0900$/)
+    data = time_data
 
-    worker = current_api_worker_worker
-    result_working_record = worker.start_work!(Time.current)
-    render json: result_working_record
+    if data.match?(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+0900$/)
+      worker = current_api_worker_worker
+      result_working_record = worker.start_work!(Time.zone.parse(data))
+      render json: result_working_record
+    else
+      render json: { message: 'データ形式が不正です' }, status: :bad_request
+    end
   end
 
   def finish
-    # time_data.match?(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+0900$/)
+    data = time_data
 
-    worker = current_api_worker_worker
-    result_working_record = worker.finish_work!(Time.current)
-    render json: result_working_record
+    if data.match?(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+0900$/)
+      worker = current_api_worker_worker
+      result_working_record = worker.finish_work!(Time.zone.parse(data))
+      render json: result_working_record
+    else
+      render json: { message: 'データ形式が不正です' }, status: :bad_request
+    end
   end
 
   def paid_amounts
@@ -52,7 +60,8 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   private
 
   def time_data
-    encrypted = Base64.decode64(params[:code])
+    encrypted = Base64.decode64(params[:time])
+
     cipher = OpenSSL::Cipher.new('aes-256-cbc')
 
     aes_key = AesKeySet.last
@@ -65,6 +74,8 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
     decrypted << cipher.update(encrypted)
     decrypted << cipher.final
     decrypted
+  rescue
+    ''
   end
 
   # 2017/12/21 Yuki INOUE:

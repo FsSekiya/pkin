@@ -4,6 +4,9 @@ Rails:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Lint/RescueWithoutErrorClass:
+  Enabled: false
+
 Metrics/LineLength:
   Max: 120
 
