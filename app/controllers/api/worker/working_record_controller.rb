@@ -29,6 +29,14 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   def start
     data = time_data
 
+    # (nits)
+    # ISO8601を想定しているならば、
+    # begin
+    #   d = Time.iso8601(data)
+    # rescue ArgumentError
+    #   # データ形式が不正
+    # end
+    # みたいにしたほうが正しくカバー出来るし、見やすいかと思います。
     if data.match?(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+0900$/)
       worker = current_api_worker_worker
       result_working_record = worker.start_work!(Time.zone.parse(data))
@@ -41,6 +49,8 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   def finish
     data = time_data
 
+    # (nits)
+    # 同上
     if data.match?(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+0900$/)
       worker = current_api_worker_worker
       result_working_record = worker.finish_work!(Time.zone.parse(data))
@@ -60,6 +70,8 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   private
 
   def time_data
+    # (質問)
+    # paramsでやりとりするBase64はurlsafe_decode64じゃなくて大丈夫ですか？
     encrypted = Base64.decode64(params[:time])
 
     cipher = OpenSSL::Cipher.new('aes-256-cbc')

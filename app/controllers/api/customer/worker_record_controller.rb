@@ -6,6 +6,8 @@ class Api::Customer::WorkerRecordController < Api::ApplicationController
     render json: {
       worker: worker,
       working_records: ActiveModelSerializers::SerializableResource.new(
+        # (IMO)
+        # このwhere(...).order(...)はmodelにscope定義したほうが後々いいかと思います。
         WorkingRecord.where(worker_id: worker.id,
                             start_at: today.beginning_of_month..today.end_of_month).order(:start_at),
         adapter: :json
@@ -14,11 +16,17 @@ class Api::Customer::WorkerRecordController < Api::ApplicationController
   end
 
   def update
+    # 全体的にメソッド肥大気味なので、ビジネスロジックは`WorkingRecord`モデルに整理すると見通しやすくなると思います。
+
     working_record = WorkingRecord.find_by(id: worker_params[:id])
 
     label = "#{worker_params[:record_date]} "
     start_label = "#{worker_params[:start_time][:HH]}:#{worker_params[:start_time][:mm]}"
     finish_label = "#{worker_params[:finish_time][:HH]}:#{worker_params[:finish_time][:mm]}"
+    # (nits)
+    # このあたり、実際には任意の文字列が入り得るように見えます。 `0000:0000` とか。
+    # 通信するのアプリだけだと思うので、基本的に想定外のもの来ないかなとは思いますし、最終的な出力にXSSとかは無いので
+    # まぁnice to haveですが、もう少しvalidationしてもいいかも、と思いました。潜在バグを避ける感じです。
 
     cond = finish_label < start_label
     return render json: { message: '開始時間と終了時間が逆です' }, status: :bad_request if cond

@@ -3,6 +3,11 @@ class Api::Worker::SessionsController < DeviseTokenAuth::SessionsController
 
   # rubocop:disable all
   def create
+    # (IMO)
+    # なんか全体的に過剰に抽象的に見えます。
+    # どこかの参考コードを元になさってますか？(Deviseの内部的なテクニックを使ってるようにも見えます)
+    # session管理まわりは簡潔にかつ具体的になさったほうが安心感あると思います。
+
     field = (resource_params.keys.map(&:to_sym) & resource_class.authentication_keys).first
 
     @resource = nil
