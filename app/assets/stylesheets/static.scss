@@ -13,4 +13,33 @@
  */
 @import 'bootstrap/dist/css/bootstrap.min';
 
-@import './_trump';
+$red: #CD585C;
+$fs-l: 18px;
+$fs-m: 15px;
+body {
+    font-size: $fs-m;
+}
+a {
+    color: inherit;
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+h2 {
+    border-bottom: 2px solid $red;
+    padding-bottom: 8px;
+    font-weight: bold;
+    font-size: $fs-l;
+}
+.underbar_list {
+    margin: 0;
+    padding: 8px 0 0;
+    list-style: none;
+    li {
+        margin: 16px 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid $red;        
+    }
+}

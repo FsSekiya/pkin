@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :static, only: [] do
     collection do
       get :help
+      get :help_detail
       get :notification
+      get :notification_detail
       get :terms
       get :privacy
     end

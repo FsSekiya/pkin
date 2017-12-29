@@ -4,7 +4,11 @@ class StaticController < ApplicationController
 
   def help; end
 
+  def help_detail; end
+
   def notification; end
+
+  def notification_detail; end
 
   def terms; end
 
