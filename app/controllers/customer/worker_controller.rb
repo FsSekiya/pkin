@@ -11,12 +11,27 @@ class Customer::WorkerController < Customer::ApplicationController
   end
 
   def create
-    redirect_to customer_branch_path(1), flash: { notice: '変更しました' }
+    # TODO: uidをちゃんとセットする
+    # TODO: passwordどうすんの？
+    @worker = Worker.new(worker_params.merge(
+                           password: worker_params[:phone_number],
+                           uid: '12341234'
+    ))
+
+    if @worker.save
+      redirect_to customer_branch_path(worker_params[:branch_id]), flash: { notice: '保存しました' }
+    else
+      # TODO: エラー処理
+      rendert :new
+    end
   end
 
   private
 
   def worker_params
-    params.require(:worker).permit(:name, :email, :image, :branch_id)
+    params.require(:worker)
+          .permit(:name, :email, :image, :branch_id,
+                  :name, :entrance_date, :hourly_pay, :birthday, :address, :phone_number,
+                  :bank_name, :bank_branch, :bank_kind, :bank_number)
   end
 end

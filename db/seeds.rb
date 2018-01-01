@@ -58,6 +58,10 @@ email_forgery = Forgery(:email)
     entrance_date: entrance_date,
     birthday: entrance_date - (20..40).random.year,
     bank_account: bank_account,
+    bank_number: bank_account,
+    bank_name: ForgeryJa(:address).street_name,
+    bank_branch: "カウンティアバンク",
+    bank_kind: rand(0..1),
     email: email_forgery.address
   )
 end

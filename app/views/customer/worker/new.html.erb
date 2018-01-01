@@ -2,22 +2,40 @@
   <div class="row">
     <div class="col-8">
       <h1>
-        <%= @worker.branch.name%>支店勤務登録
+        新規従業員登録
       </h1>
     </div>
   </div>
 </section>
-
 <section class="content">
   <div class="row">
     <div class="col-12">
       <div class="box">
         <div class="box-body">
           <%= simple_form_for(@worker, url: customer_worker_index_path, method: :post) do |f| %>
-            <%= f.input :branch_id, as: :hidden %>
-            <%= f.input :name %>
-            <%= f.input :email %>
-            <%= f.input :image, as: :file %>
+            <%= f.input :branch_id, as: :hidden, value: @worker.branch.id %>
+            <div class="row">
+              <div class="col-6">
+                <%= f.input :name %>
+                <div class="form-group string optional worker_name">
+                  <label for="worker_name" class="control-label string optional">所属</label>
+                  <p class="pl-3"><%= @worker.branch.name %></p>
+                </div>
+                <%= f.input :entrance_date %>
+                <%= f.input :hourly_pay %>
+                <%= f.input :birthday %>
+                <%= f.input :address %>
+              </div>
+              <div class="col-6">
+                <%= f.input :phone_number %>
+                <%= f.input :email %>
+                <label class="font-weight-bold">銀行口座</label>
+                <%= f.input :bank_name, label_html: {class: 'font-weight-normal'} %>
+                <%= f.input :bank_branch, label_html: {class: 'font-weight-normal'} %>
+                <%= f.input :bank_kind, as: :select, collection: Worker.bank_kinds.map { |bank_kind, _| [bank_kind, bank_kind] }, label_html: {class: 'font-weight-normal'}, include_blank: false %>
+                <%= f.input :bank_number, label_html: {class: 'font-weight-normal'} %>
+              </div>
+            </div>
             <%= f.button :submit %>
           <% end %>
         </div>
@@ -25,4 +43,3 @@
     </div>
   </div>
 </section>
-

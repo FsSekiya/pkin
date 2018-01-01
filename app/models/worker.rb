@@ -5,26 +5,16 @@ class Worker < ApplicationRecord
          :recoverable, :rememberable, :trackable,
          authentication_keys: [:uid], case_insensitive_keys: [:uid]
 
+  include WorkerValidation
+
   belongs_to :branch
   has_many :working_records, dependent: :destroy
   has_many :prepayment_applications, dependent: :destroy
   belongs_to :current_working_record, class_name: 'WorkingRecord', optional: true
 
-  delegate :company, to: :branch
+  enum bank_kind: { normal: 0, current: 1 }
 
-  has_paper_trail(
-    ignore: %i[
-      reset_password_token
-      reset_password_sent_at
-      remember_created_at
-      sign_in_count
-      current_sign_in_at
-      last_sign_in_at
-      current_sign_in_ip
-      last_sign_in_ip
-      updated_at
-    ]
-  )
+  delegate :company, to: :branch
 
   def working?
     !current_working_record.nil?
@@ -102,4 +92,18 @@ class Worker < ApplicationRecord
   def working_records_of_iteration(iteration_offset)
     working_records.where(start_at: company.salary_iteration(iteration_offset))
   end
+
+  has_paper_trail(
+    ignore: %i[
+      reset_password_token
+      reset_password_sent_at
+      remember_created_at
+      sign_in_count
+      current_sign_in_at
+      last_sign_in_at
+      current_sign_in_ip
+      last_sign_in_ip
+      updated_at
+    ]
+  )
 end
