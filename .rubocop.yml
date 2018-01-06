@@ -4,7 +4,7 @@ Rails:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Lint/RescueWithoutErrorClass:
+Style/RescueStandardError:
   Enabled: false
 
 Metrics/LineLength:

@@ -10,6 +10,7 @@ end
 
 o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
 
+if ENV['SEED_DATA'] || Rails.env.development?
 company = Company.create(name: 'カウンティア株式会社')
 
 CompanySetting.create(
@@ -99,3 +100,4 @@ Admin.create(
   email: "to.be.mr.all.rounder@gmail.com",
   password: '12341234',
   password_confirmation: '12341234')
+end
