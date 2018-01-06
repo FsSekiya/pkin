@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:hisea/devise-bootstrap-views.git
+  remote: https://github.com/hisea/devise-bootstrap-views.git
   revision: 34e2c7b5d5c22295a2cea4265c4f31deba29be18
   branch: bootstrap4
   specs:
