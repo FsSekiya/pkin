@@ -8,7 +8,7 @@
         <th class="w120">時給</th>
       </tr>
       <template v-for="(col, index) in worker_list">
-        <tr :key="col.id" v-on:click="open_worker_info(index, col.id)">
+        <tr :key="col.id" v-on:click="open_worker_info(index, col.id)" class="c-p">
           <td class="text-center">
             <i
               class="fa"
@@ -81,7 +81,7 @@
           entrance_date: '',
           hourly_pay: '',
           birthday: '',
-          bank_account: '',
+          bank_account: '', 
         }
       }
     },
@@ -90,15 +90,22 @@
     methods: {
       open_worker_info: function(index, worker_id) {
         var vm = this
+
+        console.debug(index)
+        if (!vm.collapsed[index]) {
+            vm.$set(vm.collapsed, vm.current_open_index, true)
+            return
+        }
+
         axios
           .get('/api/customer/worker_record/' + worker_id)
           .then(({data, _status}) => {
             if (vm.current_open_index !== 0) {
-              vm.$set(vm.collapsed, vm.current_open_index, !vm.collapsed[vm.current_open_index])
+              vm.$set(vm.collapsed, vm.current_open_index, true)
             }
             vm.current_open_index = index
             vm.current_worker = data.worker
-            vm.$set(vm.collapsed, index, !vm.collapsed[index])
+            vm.$set(vm.collapsed, index, false)
             vm.working_records = data.working_records
           })
           .catch(() => {
