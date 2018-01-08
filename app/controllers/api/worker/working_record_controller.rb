@@ -82,7 +82,9 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
   #   どうしても長くなってしまうので、 Metrics のチェックをオフにします。
   #
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Style/FormatStringToken
   def compute_paid_amounts_responce(diff)
+    time_format = '%Y/%m/%d'
     diff = diff.to_i
 
     worker = current_api_worker_worker
@@ -97,7 +99,7 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
 
     cells += working_records.map do |r|
       { 'level' => 1,
-        'field' => r.start_at.strftime('%Y/%m/%d'),
+        'field' => r.start_at.strftime(time_format),
         'value' => format('%.1f時間', r.hours_worked) }
     end
 
@@ -107,7 +109,7 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
 
     cells += working_records.map do |r|
       { 'level' => 1,
-        'field' => r.start_at.strftime('%Y/%m/%d'),
+        'field' => r.start_at.strftime(time_format),
         'value' => pretty_print_currency_amount(r.payment) }
     end
 
@@ -120,7 +122,7 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
 
     cells += prepayment_applications.map do |a|
       { 'level' => 1,
-        'field' => a.created_at.strftime('%Y/%m/%d'),
+        'field' => a.created_at.strftime(time_format),
         'value' => pretty_print_currency_amount(a.amount) }
     end
 
@@ -140,4 +142,5 @@ class Api::Worker::WorkingRecordController < Api::Worker::ApplicationController
     }
   end
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Style/FormatStringToken
 end

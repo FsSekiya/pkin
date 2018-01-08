@@ -10,7 +10,7 @@ class Worker < ApplicationRecord
   belongs_to :branch
   has_many :working_records, dependent: :destroy
   has_many :prepayment_applications, dependent: :destroy
-  belongs_to :current_working_record, class_name: 'WorkingRecord', optional: true
+  belongs_to :current_working_record, class_name: 'WorkingRecord', optional: true, inverse_of: :worker
 
   enum bank_kind: { normal: 0, current: 1 }
 
