@@ -1,0 +1,15 @@
+ja:
+  customer:
+    worker:
+      new:
+        entrance_date: '入職日'
+        name: '名前'
+        hourly_pay: '毎時給与'
+        birthday: '生年月日'
+        address: '住所'
+        phone_number: '電話番号'
+        email: 'メール'
+        bank_name: '銀行名'
+        bank_branch: '銀行支店名'
+        bank_kind: '口座タイプ'
+        bank_number: '口座番号'

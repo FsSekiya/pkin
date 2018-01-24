@@ -31,3 +31,17 @@
 
 en:
   hello: "Hello world"
+  customer:
+    worker:
+      new:
+        entrance_date: 'Entrance Date'
+        name: 'Name'
+        hourly_pay: 'Hourly Salary'
+        birthday: 'Birthday'
+        address: 'Address'
+        phone_number: 'Phone Number'
+        email: 'Email'
+        bank_name: 'Bank Name'
+        bank_branch: 'Bank Branch'
+        bank_kind: 'Bank Kind'
+        bank_number: 'Bank Number'

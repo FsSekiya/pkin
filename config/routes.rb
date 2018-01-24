@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :static, only: [] do
     collection do
       get :help
@@ -10,7 +9,7 @@ Rails.application.routes.draw do
       get :privacy
     end
   end
-    
+
   devise_for :customer, controllers: {
     sessions: 'customer/sessions'
   }, skip: %i[registration passwords], class_name: 'Customer'
@@ -83,7 +82,8 @@ Rails.application.routes.draw do
     end
 
     namespace :customer do
-      resources :worker_record, only: [:show, :update]
+      resources :worker_record, only: %i[show update]
+      resources :prepayment, only: %i[show update]
     end
   end
 end

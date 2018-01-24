@@ -23,7 +23,7 @@
           <td colspan="4">
             <worker-basic-info :worker='current_worker'></worker-basic-info>
             <div class="clearfix mt20 p10">
-              <button type="button" v-on:click="show_payment_records" class="btn btn-secondary col-4 offset-1">前払金ログ</button>
+              <button type="button" v-on:click="show_prepayment_applications" class="btn btn-secondary col-4 offset-1">前払金ログ</button>
               <button type="button" v-on:click="show_worker_records" class="btn btn-primary col-4 offset-2">出席ログ</button>
             </div>
             <span id="working_records_span" v-if="workerRecordsActive">
@@ -31,8 +31,8 @@
                             :worker='current_worker'
                             ></working-record>
             </span>
-            <span id="payment_records_span" v-if="paymentRecordsActive">
-                <payment-record :payment-records='payment_records'
+            <span id="prepayment_applications_span" v-if="prepaymentApplicationsActive">
+                <payment-record :prepayment-applications='prepayment_applications'
                             :worker='current_worker'
                             ></payment-record>
             </span>
@@ -67,10 +67,10 @@
         collapsed: new Array(worker_list.length).fill(true),
         worker_list: worker_list,
         working_records: [],
-        payment_records: [],
+        prepayment_applications: [],
         current_open_index: 0,
         workerRecordsActive: true,
-        paymentRecordsActive: false,
+        prepaymentApplicationsActive: false,
         current_worker: {
           id: '',
           uid: '',
@@ -89,35 +89,38 @@
     },
     methods: {
       open_worker_info: function(index, worker_id) {
-        var vm = this
-
-        console.debug(index)
-        if (!vm.collapsed[index]) {
-            vm.$set(vm.collapsed, vm.current_open_index, true)
-            return
-        }
-
+        var vm = this       
         axios
           .get('/api/customer/worker_record/' + worker_id)
           .then(({data, _status}) => {
-            if (vm.current_open_index !== 0) {
-              vm.$set(vm.collapsed, vm.current_open_index, true)
-            }
-            vm.current_open_index = index
             vm.current_worker = data.worker
-            vm.$set(vm.collapsed, index, false)
             vm.working_records = data.working_records
+            if (!vm.collapsed[index]) { // accordion was open
+              vm.$set(vm.collapsed, vm.current_open_index, true)
+              return
+            } else { // accordion was closed
+              vm.$set(vm.collapsed, vm.current_open_index, true)
+              vm.current_open_index = index
+              vm.$set(vm.collapsed, index, false)
+            } 
+          })
+          .catch(() => {
+          })
+        axios
+          .get('/api/customer/prepayment/' + worker_id)
+          .then(({data, _status}) => {
+            vm.prepayment_applications = data.prepayment_applications
           })
           .catch(() => {
           })
       },
-      show_payment_records: function() {
+      show_prepayment_applications: function() {
         this.workerRecordsActive = false;
-        this.paymentRecordsActive = true;
+        this.prepaymentApplicationsActive = true;
       },
       show_worker_records: function() {
         this.workerRecordsActive = true;
-        this.paymentRecordsActive = false;
+        this.prepaymentApplicationsActive = false;
       },
     }
   }

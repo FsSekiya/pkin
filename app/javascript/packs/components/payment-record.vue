@@ -16,23 +16,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2017年11月02日</td>
-            <td>3200円(時給800円)</td>
-            <td>1200円</td>
-            <td>修正</td>
-          </tr>
-          <tr>
-            <td>2017年12月02日</td>
-            <td>3200円(時給800円)</td>
-            <td>1200円</td>
-            <td>修正</td>
-          </tr>
-          <tr>
-            <td>2017年13月02日</td>
-            <td>3200円(時給800円)</td>
-            <td>1200円</td>
-            <td>修正</td>
+          <tr v-for="prepayment_application in prepayment_applications" :key="prepayment_application.id">
+            <td>{{ prepayment_application.created_date }}</td>
+            <td>unknown</td>
+            <td>{{ prepayment_application.amount }}</td>
+            <td>
+              <button @click.prevent.self="prepayment_application_edit_open(worker, prepayment_application)" class="btn btn-info">修正</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -56,14 +46,14 @@
       VueTimepicker
     },
     props: [
-      'paymentRecords',
+      'prepaymentApplications',
       'worker'
     ],
     data: function () {
       return {
         current_month: (new Date()),
         month_diff: 0,
-        payment_records: this.paymentRecords,
+        prepayment_applications: this.prepaymentApplications,
         worker_id: this.worker.id,
         token: axios.defaults.headers['X-CSRF-Token']
       }
@@ -72,9 +62,17 @@
     },
     methods: {
       update_date: function(increment) {
-        var vm = this;
-        // let diff = vm.month_diff + increment;
-        vm.current_month = new Date(vm.current_month.setMonth(vm.current_month.getMonth() + increment));
+        var vm = this
+        let diff = vm.month_diff + increment
+        axios
+          .get('/api/customer/prepayment/' + vm.worker_id + '?month_diff=' + diff)
+          .then(({data, _status}) => {
+            vm.prepayment_applications = data.prepayment_applications
+            vm.current_month = new Date(vm.current_month.setMonth(vm.current_month.getMonth() + increment))
+            vm.month_diff += increment
+          })
+          .catch(() => {
+          })
       },
       older_than_current_month: function() {
         let today = new Date();

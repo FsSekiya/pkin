@@ -16,24 +16,24 @@
             <%= f.input :branch_id, as: :hidden, value: @worker.branch.id %>
             <div class="row">
               <div class="col-6">
-                <%= f.input :name %>
+                <%= f.input :name, label: t('customer.worker.new.name') %>
                 <div class="form-group string optional worker_name">
                   <label for="worker_name" class="control-label string optional">所属</label>
                   <p class="pl-3"><%= @worker.branch.name %></p>
                 </div>
-                <%= f.input :entrance_date %>
-                <%= f.input :hourly_pay %>
-                <%= f.input :birthday %>
-                <%= f.input :address %>
+                <%= f.input :entrance_date, label: t('customer.worker.new.entrance_date') %>
+                <%= f.input :hourly_pay, label: t('customer.worker.new.hourly_pay') %>
+                <%= f.input :birthday, label: t('customer.worker.new.birthday') %>
+                <%= f.input :address, label: t('customer.worker.new.address') %>
               </div>
               <div class="col-6">
-                <%= f.input :phone_number %>
-                <%= f.input :email %>
+                <%= f.input :phone_number, label: t('customer.worker.new.phone_number') %>
+                <%= f.input :email, label: t('customer.worker.new.email') %>
                 <label class="font-weight-bold">銀行口座</label>
-                <%= f.input :bank_name, label_html: {class: 'font-weight-normal'} %>
-                <%= f.input :bank_branch, label_html: {class: 'font-weight-normal'} %>
-                <%= f.input :bank_kind, as: :select, collection: Worker.bank_kinds.map { |bank_kind, _| [bank_kind, bank_kind] }, label_html: {class: 'font-weight-normal'}, include_blank: false %>
-                <%= f.input :bank_number, label_html: {class: 'font-weight-normal'} %>
+                <%= f.input :bank_name, label_html: {class: 'font-weight-normal'}, label: t('customer.worker.new.bank_name') %>
+                <%= f.input :bank_branch, label_html: {class: 'font-weight-normal'}, label: t('customer.worker.new.bank_branch') %>
+                <%= f.input :bank_kind, as: :select, collection: Worker.bank_kinds.map { |bank_kind, _| [bank_kind, bank_kind] }, label_html: {class: 'font-weight-normal'}, include_blank: false, label: t('customer.worker.new.bank_kind') %>
+                <%= f.input :bank_number, label_html: {class: 'font-weight-normal'}, label: t('customer.worker.new.bank_number') %>
               </div>
             </div>
             <%= f.button :submit %>
