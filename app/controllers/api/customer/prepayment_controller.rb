@@ -15,5 +15,17 @@ class Api::Customer::PrepaymentController < Api::ApplicationController
     }, adapter: :json
   end
 
-  def update; end
+  def update
+    prepayment_application = PrepaymentApplication.find_by(id: prepayment_params[:id])
+    rejected = params[:rejected].to_i == 1
+    if prepayment_application.update(rejected: rejected)
+      render json: { message: '更新しました' }
+    else
+      render json: { message: 'なにかおかしいです' }, status: :bad_request
+    end
+  end
+
+  def prepayment_params
+    params.require(:prepayment).permit(:id, :status)
+  end
 end

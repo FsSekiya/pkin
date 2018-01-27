@@ -27,16 +27,16 @@
     </div>
   </h2>
   <div class="text-center mt40">
-    <h2>預かり金額 ¥<%= 1000000.to_s(:delimited) %></h2>
+    <h2>預かり金額 ¥<%= @deposit.to_s(:delimited) %></h2>
   </div>
   <div class="row mt40">
     <div class="col-5 offset-1">
-      <chartjs-bar :labels="['給与総額','前払利用額']" :data="[100,40]" :option="{responsive:true, legend: {display: false}, scales: {yAxes: [{stacked: true}]}}"></chartjs-bar>
+      <chartjs-bar :labels="['給与総額','前払利用額']" :data="<%=[@payment_total, @prepayment_total]%>" :option="{responsive:true, legend: {display: false}, scales: {yAxes: [{stacked: true}]}}"></chartjs-bar>
     </div>
     <div class="col-5">
       <chartjs-doughnut :datalabel="'TestDataLabel'"
                         :labels="['利用', '残り']"
-                        :data="[40, 60]"
+                        :data="<%= [@prepayment_total, @remaining_deposit] %>"
                         :option="{}"
                         ></chartjs-doughnut>
     </div>

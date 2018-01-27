@@ -9,4 +9,8 @@ class PrepaymentApplication < ApplicationRecord
     return :approved if prepayment
     :waiting
   end
+
+  def created_date
+    :created_at.strftime('%Y年%m月%d日')
+  end
 end

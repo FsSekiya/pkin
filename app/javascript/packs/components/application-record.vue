@@ -16,8 +16,8 @@
                :class="{'fa-plus':collapsed[index], 'fa-minus':!collapsed[index]}"
                aria-hidden="true"></i>
           </td>
-          <td>{{ col.date }}</td>
-          <td>{{ col.applied_amount }}円</td>
+          <td>{{ col.created_at }}</td>
+          <td>{{ col.amount }}円</td>
           <td>{{ col.approved_amount }}円</td>
           <td>{{ col.payed_amount }}円</td>
           <td class="text-center">

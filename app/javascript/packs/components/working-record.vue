@@ -79,7 +79,7 @@
       'workingRecords',
       'worker'
     ],
-    data: function () {
+    data () {
       return {
         current_month: (new Date()),
         month_diff: 0,
@@ -105,17 +105,17 @@
       }
     },
     watch: {
-      workingRecords: function (val) {
+      workingRecords (val) {
         this.working_records = val
       },
-      worker: function (val) {
+      worker (val) {
         this.worker_id = val.id
       }
     },
-    created: function () {
+    created () {
     },
     methods: {
-      update_date: function(increment) {
+      update_date(increment) {
         var vm = this
         let diff = vm.month_diff + increment
         axios
@@ -128,7 +128,7 @@
           .catch(() => {
           })
       },
-      older_than_current_month: function() {
+      older_than_current_month() {
         let today = new Date()
         if (this.current_month < today.setMonth(today.getMonth() - 1)) {
           return false
@@ -152,13 +152,13 @@
                          vm.modal_data.finish_time['HH'] + ':' + vm.modal_data.finish_time['mm'])
                  vm.$set(vm_data, 'payment', data.payment)
 
-                 this.$refs.working_record_edit.close()
+                 this.$refs.working_record_edit.hide()
                  alert(data.message)
                },({_error, response}) => {
                  alert(response.data.message)
                }).catch(() => {})
       },
-      working_record_edit_open: function(current_worker, working_record) {
+      working_record_edit_open(current_worker, working_record) {
         var vm = this
         vm.modal_worker = current_worker
         vm.$set(vm.modal_data, 'record_date', working_record.start_date)

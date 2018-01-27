@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221065749) do
+ActiveRecord::Schema.define(version: 20180127064934) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "image", default: "", null: false
@@ -85,6 +85,14 @@ ActiveRecord::Schema.define(version: 20171221065749) do
     t.index ["company_id"], name: "index_customers_on_company_id"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "deposits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "company_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_deposits_on_company_id"
   end
 
   create_table "payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -179,6 +187,7 @@ ActiveRecord::Schema.define(version: 20171221065749) do
   add_foreign_key "branches", "companies"
   add_foreign_key "company_settings", "companies"
   add_foreign_key "customers", "companies"
+  add_foreign_key "deposits", "companies"
   add_foreign_key "payments", "workers"
   add_foreign_key "prepayment_applications", "payments", column: "prepayment_id"
   add_foreign_key "prepayment_applications", "workers"
