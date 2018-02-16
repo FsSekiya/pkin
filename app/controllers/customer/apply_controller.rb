@@ -4,7 +4,7 @@ class Customer::ApplyController < Customer::ApplicationController
   def show
     today = Time.zone.today + params[:diff].to_i.month
     worker_ids = Worker.where(branch_id: params[:id]).map(&:id)
-    applications = PrepaymentApplication.includes(:prepayment).where(
+    applications = PrepaymentApplication.where(
       created_at: today.beginning_of_month..today.end_of_month,
       worker_id: worker_ids
     )
