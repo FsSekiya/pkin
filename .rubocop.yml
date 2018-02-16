@@ -17,9 +17,8 @@ Style/Documentation:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 30
+  Max: 35
   Exclude:
-    - app/controllers/api/soundshare/history_controller.rb
     - app/controllers/api/customer/worker_record_controller.rb
 
 AsciiComments:
@@ -53,6 +52,7 @@ AllCops:
     - spec/**/*
     - config/initializers/*
     - config/routes.rb
+    - config/**/*
 
 Metrics/CyclomaticComplexity:
   Max: 10

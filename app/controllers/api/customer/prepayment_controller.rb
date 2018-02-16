@@ -6,7 +6,7 @@ class Api::Customer::PrepaymentController < Api::ApplicationController
     render json: {
       worker: worker,
       prepayment_applications: ActiveModelSerializers::SerializableResource.new(
-        PrepaymentApplication.where(
+        PrepaymentApplication.includes(:prepayment).where(
           worker_id: worker.id,
           created_at: today.beginning_of_month..today.end_of_month
         ).order(:created_at),

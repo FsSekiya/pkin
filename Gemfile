@@ -40,6 +40,7 @@ group :development, :test do
   gem 'foreman'
   gem 'binding_of_caller'
   gem 'brakeman', require: false
+  gem 'bullet'
   gem 'byebug', platform: :mri
   gem 'pry-byebug'
   gem 'pry-rails'
