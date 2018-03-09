@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127064934) do
+ActiveRecord::Schema.define(version: 20180223070653) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "image", default: "", null: false
@@ -64,6 +64,17 @@ ActiveRecord::Schema.define(version: 20180127064934) do
     t.datetime "updated_at", null: false
     t.integer "monthly_cut_off_date"
     t.index ["company_id"], name: "index_company_settings_on_company_id"
+  end
+
+  create_table "customer_informations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "customer_id"
+    t.string "title"
+    t.text "content"
+    t.datetime "published_date"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_informations_on_customer_id"
   end
 
   create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -136,6 +147,17 @@ ActiveRecord::Schema.define(version: 20180127064934) do
     t.index ["monthly_payment_id"], name: "index_work_monthly_summaries_on_monthly_payment_id"
   end
 
+  create_table "worker_informations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "worker_id"
+    t.string "title"
+    t.text "content"
+    t.datetime "published_date"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["worker_id"], name: "index_worker_informations_on_worker_id"
+  end
+
   create_table "workers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "provider", default: "worker_id", null: false
     t.string "uid", default: "", null: false
@@ -186,12 +208,14 @@ ActiveRecord::Schema.define(version: 20180127064934) do
 
   add_foreign_key "branches", "companies"
   add_foreign_key "company_settings", "companies"
+  add_foreign_key "customer_informations", "customers"
   add_foreign_key "customers", "companies"
   add_foreign_key "deposits", "companies"
   add_foreign_key "payments", "workers"
   add_foreign_key "prepayment_applications", "payments", column: "prepayment_id"
   add_foreign_key "prepayment_applications", "workers"
   add_foreign_key "work_monthly_summaries", "payments", column: "monthly_payment_id"
+  add_foreign_key "worker_informations", "workers"
   add_foreign_key "workers", "branches"
   add_foreign_key "workers", "working_records", column: "current_working_record_id"
   add_foreign_key "working_records", "workers"

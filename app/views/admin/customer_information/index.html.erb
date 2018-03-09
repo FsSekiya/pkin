@@ -1,0 +1,26 @@
+<section class="content-header">
+  <div class="row">
+    <div class="col-10">
+      <h1>
+        企業向けお知らせ
+      </h1>
+    </div>
+    <div class="col-2">
+      <%= link_to new_admin_customer_information_path do %>
+        <button type="button" class="btn btn-primary">新規作成</button>
+      <% end %>
+    </div>
+  </div>
+</section>
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="box">
+        <div class="box-body table-responsive no-padding">
+          <accordion information-list="<%= @information_list.to_json %>">
+          </accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

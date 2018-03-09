@@ -33,6 +33,9 @@ Rails.application.routes.draw do
         get :login_customer
       end
     end
+    resources :information, only: %i[index]
+    resources :worker_information, only: %i[index create new]
+    resources :customer_information, only: %i[index create new]
   end
 
   namespace :customer do
@@ -42,6 +45,8 @@ Rails.application.routes.draw do
     resources :worker, only: %i[new create]
     resources :working_record, only: %i[update]
     resources :apply, only: %i[show]
+    resources :information, only: %i[index]
+    resources :deposit, only: %i[index create new]
   end
 
   namespace :api, defaults: { format: :json } do

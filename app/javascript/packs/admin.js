@@ -11,6 +11,7 @@ import Vue from 'vue/dist/vue.esm'
 import BootstrapVue from 'bootstrap-vue'
 import ApplyStatusSelect from './components/apply-status-select.vue'
 import ChangeBalance from './components/change-balance.vue'
+import Accordion from './components/accordion.vue'
 
 Vue.use(BootstrapVue)
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     components: {
       ApplyStatusSelect,
-      ChangeBalance
+      ChangeBalance,
+      Accordion
     }
   })
 })

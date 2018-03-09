@@ -2,29 +2,62 @@
   <div class="row">
     <div class="col-8">
       <h1>
-        勤怠設定
+        設定
       </h1>
     </div>
+  </div>
 </section>
-
 <section class="content">
   <div class="row">
     <div class="col-md-12">
       <div class="box">
+        <div class="box-header">
+          勤怠設定
+        </div>
         <div class="box-body">
           <table class="table table-bordered">
             <tbody>
               <tr>
-                <th class="w200">時給計算時間単位</th>
-                <td><%= current_customer.company.company_setting.wage_calculation_time_unit %></td>
+                <th width="30%">時給計算時間単位</th>
+                <td>15分</td>
               </tr>
               <tr>
-                <th>前払い自動承認</th>
-                <td><%= current_customer.company.company_setting.auto_prepayment_approved? ? 'ON' : 'OFF' %></td>
+                <th width="30%">前払い自動承認</th>
+                <td>ON</td>
               </tr>
               <tr>
-                <th>前払い可能額割合</th>
-                <td><%= current_customer.company.company_setting.prepayment_allowed_percentage %>%</td>
+                <th width="30%">前払い可能割合</th>
+                <td>60%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="box-header">
+          預か金アラート設定
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th width="30%">アラート通知金額</th>
+                <td>100,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="box-header">
+          メール通知設定
+        </div>
+        <div class="box-body">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th width="30%">前払い申請通知</th>
+                <td>ON</td>
+              </tr>
+              <tr>
+                <th width="30%">E GATEkらのお知らせ</th>
+                <td>ON</td>
               </tr>
             </tbody>
           </table>

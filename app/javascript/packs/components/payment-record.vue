@@ -133,7 +133,7 @@ export default {
           rejected: this.modal_selected,
           id: this.modal_data.id
         })
-        .then(({ data, _status }) => {
+        .then(({ _data, _status }) => {
           let index = this.prepayment_applications.findIndex(
             item => item.id === this.modal_data.id
           );
@@ -143,8 +143,8 @@ export default {
           this.$refs.prepayment_application_edit.hide();
           // alert(data.message)
         })
-        .catch(error => {
-          console.log(error);
+        .catch(_error => {
+          // console.log(error);
         });
     }
   }

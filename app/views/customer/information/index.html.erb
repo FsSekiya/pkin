@@ -1,0 +1,21 @@
+<section class="content-header">
+  <div class="row">
+    <div class="col-10">
+      <h1>
+        お知らせ
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="box">
+        <div class="box-body table-responsive no-padding">
+          <accordion information-list="<%= @information_list.to_json %>">
+          </accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

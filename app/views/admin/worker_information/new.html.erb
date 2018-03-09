@@ -1,0 +1,20 @@
+<section class="content-header">
+  <div class="row">
+    <div class="col-8">
+      <h1>
+        お知らせ
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <%= simple_form_for(@information, url: admin_worker_information_index_path, method: :post) do |f| %>
+        <%= f.input :title, label: false, placeholder: "作名"%>
+        <%= f.input :content, label: false, as: :text %>
+        <%= f.submit '送信' %>
+      <% end %>
+    </div>
+  </div>
+</section>

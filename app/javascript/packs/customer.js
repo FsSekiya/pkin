@@ -10,6 +10,7 @@
 import Vue from 'vue/dist/vue.esm'
 import WorkerAccordion from './components/worker-accordion.vue'
 import ApplicationRecord from './components/application-record.vue'
+import Accordion from './components/accordion.vue'
 import 'chart.js'
 import 'hchs-vue-charts'
 import BootstrapVue from 'bootstrap-vue'
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     components: {
       WorkerAccordion,
       ApplicationRecord,
+      Accordion
     }
   })
 })

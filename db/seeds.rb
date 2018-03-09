@@ -41,6 +41,17 @@ if ENV['SEED_DATA'] || Rails.env.development?
     company_id: company.id
   )
 
+  Customer.all.each do |customer|
+    20.times do
+      CustomerInformation.create(
+        customer_id: customer.id,
+        title: Faker::Lorem.sentence,
+        content: Faker::Lorem.paragraph,
+        published_date: Faker::Time.between(DateTime.now - 4.months, DateTime.now)
+      )
+    end
+  end
+
   name_forgery = ForgeryJa(:name)
   address_forgery = ForgeryJa(:address)
   mobile_forgery = ForgeryJa(:mobile)
@@ -69,14 +80,22 @@ if ENV['SEED_DATA'] || Rails.env.development?
     )
   end
   Worker.all.each do |worker|
-    100.times do
+    10.times do
       date = Faker::Time.between(DateTime.now - 4.months, DateTime.now)
       working_time = rand(1..8).hour
-      WorkingRecord.create(worker_id: worker.id,
-                           start_at: date,
-                           finish_at: date + working_time,
-                           hourly_pay: worker.hourly_pay,
-                           payment: (worker.hourly_pay.to_i * (working_time / 3600.0).round(2)).to_i)
+      WorkingRecord.create(
+        worker_id: worker.id,
+        start_at: date,
+        finish_at: date + working_time,
+        hourly_pay: worker.hourly_pay,
+        payment: (worker.hourly_pay.to_i * (working_time / 3600.0).round(2)).to_i
+      )
+      WorkerInformation.create(
+        worker_id: worker.id,
+        title: Faker::Lorem.sentence,
+        content: Faker::Lorem.paragraph,
+        published_date: Faker::Time.between(DateTime.now - 4.months, DateTime.now)
+      )
     end
   end
 
