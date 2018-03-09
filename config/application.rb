@@ -21,9 +21,15 @@ module PKintai
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    config.active_record.default_timezone = :local
+    config.time_zone = 'Tokyo'
+
+    config.generators do |g|
+      g.javascripts false
+      g.helper false
+      g.assets false
+      g.test_framework false
+    end
     config.i18n.default_locale = :ja
 
     # Don't generate system test files.
