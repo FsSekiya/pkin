@@ -7,19 +7,19 @@
     </div>
   </div>
 </section>
-<section class="content">
+<section class="content mt-5">
   <div class="row">
-    <div class="col-12">
-      <div class="box">
-        <div class="box-body table-responsive no-padding">
-          <%= link_to admin_customer_information_index_path do %>
-            <button type="button" class="btn btn-primary btn-lg btn-block">企業むけお知らせ</button>
-          <% end %>
-          <%= link_to admin_worker_information_index_path do %>
-            <button type="button" class="btn btn-secondary btn-lg btn-block">ユーザー向けお知らせ</button>
-          <% end %>
-        </div>
-      </div>
+    <div class="offset-3 col-6">
+      <%= link_to admin_customer_information_index_path do %>
+        <button type="button" class="btn btn-primary btn-lg btn-block">企業むけお知らせ</button>
+      <% end %>
+    </div>
+  </div>
+  <div class="row my-4">
+    <div class="offset-3 col-6">
+      <%= link_to admin_worker_information_index_path do %>
+        <button type="button" class="btn btn-secondary btn-lg btn-block">ユーザー向けお知らせ</button>
+      <% end %>
     </div>
   </div>
 </section>

@@ -16,7 +16,7 @@
           <td width="70%">{{ col.title }}</td>
         </tr>
         <tr v-show="!collapsed[index]" :key="col.id">
-          <td colspan="3">{{ col.content }}</td>
+          <td colspan="3" class="p-4 bg-white">{{ col.content }}</td>
         </tr>
       </template>
     </tbody>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from "moment";
 export default {
   props: ["informationList"],
   data: function() {
@@ -38,16 +38,18 @@ export default {
   created: function() {},
   methods: {
     openCloseAccordion: function(index) {
-      if (!this.collapsed[index]) { // accordion was open
+      if (!this.collapsed[index]) {
+        // accordion was open
         this.$set(this.collapsed, this.current_open_index, true);
-      } else {                      // accordion was closed
+      } else {
+        // accordion was closed
         this.$set(this.collapsed, this.current_open_index, true);
         this.current_open_index = index;
         this.$set(this.collapsed, index, false);
       }
     },
     formatDate: function(date) {
-      return moment.utc(date).format("YYYY-MM-DD")
+      return moment.utc(date).format("YYYY-MM-DD");
     }
   }
 };

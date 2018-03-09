@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         get :login_customer
       end
     end
+    resources :company
     resources :information, only: %i[index]
     resources :worker_information, only: %i[index create new]
     resources :customer_information, only: %i[index create new]
