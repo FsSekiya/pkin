@@ -8,6 +8,6 @@ class CreateBranches < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_index :branches, [:code],          unique: true
+    add_index :branches, [:code], unique: true
   end
 end

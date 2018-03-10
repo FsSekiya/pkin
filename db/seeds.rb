@@ -11,22 +11,33 @@ end
 o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
 
 if ENV['SEED_DATA'] || Rails.env.development?
-  company = Company.create(name: 'カウンティア株式会社')
+  company = Company.create(
+    name: 'カウンティア株式会社',
+    address: ForgeryJa(:address).full_address,
+    zip_code: ForgeryJa(:address).zip.delete('-'),
+    tel: ForgeryJa(:mobile).phone_number,
+    email: Forgery(:internet).email_address
+  )
 
   CompanySetting.create(
     company_id: company.id,
     approve_auto_prepayment: 'auto_prepayment_approved',
     prepayment_allowed_percentage: rand(100),
     wage_calculation_time_unit: 60,
-    monthly_cut_off_date: 15
+    monthly_cut_off_date: 15,
+    send_alert_amount: rand(100) * 100_000
   )
 
   5.times do
-    Company.create(name: ForgeryJa(:name).company_name)
+    Company.create(name: ForgeryJa(:name).company_name,
+                   address: ForgeryJa(:address).full_address,
+                   zip_code: ForgeryJa(:address).zip.delete('-'),
+                   tel: ForgeryJa(:mobile).phone_number,
+                   email: Forgery(:internet).email_address)
   end
 
   5.times do |i|
-    Branch.create(
+    a = Branch.create(
       name: ForgeryJa(:address).city,
       code: '1234' + i.to_s,
       company_id: company.id

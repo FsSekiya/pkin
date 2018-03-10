@@ -5,6 +5,7 @@ class CreateCompanySettings < ActiveRecord::Migration[5.1]
       t.integer :approve_auto_prepayment, limit: 1
       t.integer :prepayment_allowed_percentage, limit: 1
       t.integer :wage_calculation_time_unit, limit: 1
+      t.integer :send_alert_amount
 
       t.timestamps
     end

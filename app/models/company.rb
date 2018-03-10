@@ -1,5 +1,9 @@
 class Company < ApplicationRecord
+  include CompanyValidator
+
   has_one :company_setting, dependent: :destroy
+  accepts_nested_attributes_for :company_setting
+
   has_many :branches, dependent: :destroy
 
   delegate :prepayment_allowed_percentage, :monthly_cut_off_date, to: :company_setting

@@ -2,11 +2,11 @@ class DeviseTokenAuthCreateWorkers < ActiveRecord::Migration[5.1]
   def change
     create_table(:workers) do |t|
       ## Required
-      t.string :provider, :null => false, :default => "worker_id"
-      t.string :uid, :null => false, :default => ""
+      t.string :provider, null: false, default: 'worker_id'
+      t.string :uid, null: false, default: ''
 
       ## Database authenticatable
-      t.string :encrypted_password, :null => false, :default => ""
+      t.string :encrypted_password, null: false, default: ''
 
       ## Recoverable
       t.string   :reset_password_token
@@ -16,7 +16,7 @@ class DeviseTokenAuthCreateWorkers < ActiveRecord::Migration[5.1]
       t.datetime :remember_created_at
 
       ## Trackable
-      t.integer  :sign_in_count, :default => 0, :null => false
+      t.integer  :sign_in_count, default: 0, null: false
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
@@ -49,7 +49,7 @@ class DeviseTokenAuthCreateWorkers < ActiveRecord::Migration[5.1]
 
     # add_index :workers, :email
     # add_index :workers, [:uid, :provider],     unique: true
-    add_index :workers, [:uid],          unique: true
+    add_index :workers, [:uid], unique: true
     add_index :workers, :reset_password_token, unique: true
     # add_index :workers, :confirmation_token,   unique: true
     # add_index :workers, :unlock_token,       unique: true

@@ -17,7 +17,7 @@ class Admin::CompanyController < Admin::ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      redirect_to admin_worker_information_index_path, flash: { notice: '新規作成しました' }
+      redirect_to admin_company_index_path, flash: { notice: '新規作成しました' }
     else
       render :new
     end
@@ -30,6 +30,8 @@ class Admin::CompanyController < Admin::ApplicationController
   private
 
   def company_params
-    params.require(:company).permit(:name)
+    params.require(:company).permit(:name, :address, :tel, :email, :zip_code,
+                                    company_setting_attributes: %i[approve_auto_prepayment prepayment_allowed_percentage
+                                                                   send_alert_amount wage_calculation_time_unit])
   end
 end

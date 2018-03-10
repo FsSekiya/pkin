@@ -28,11 +28,14 @@
         <table class="table table-hover">
           <tr>
             <th>企業名</th>
-            <th>　</th>
+            <th>住所</th>
+            <th>電話番号</th>
           </tr>
           <% @companies.each do |company| %>
             <tr>
               <td><%= company.name %></td>
+              <td><%= company.address %></td>
+              <td><%= company.tel %></td>
             </tr>
           <% end %>
         </table>

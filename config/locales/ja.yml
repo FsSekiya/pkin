@@ -1,4 +1,21 @@
 ja:
+  activerecord:
+    models:
+      company: 会社
+    attributes:
+      company:
+        id: ID
+        name: 名前
+        address: 住所
+        tel: 電話番号
+        zip_code: 郵便番号
+        email: メールアドレス
+        created_at: 登録日時
+      company_setting:
+        prepayment_allowed_percentage: 自動支払設定(%)
+        approve_auto_prepayment: 自動承認設定
+        wage_calculation_time_unit: 時給計算時間単位(分)
+        send_alert_amount: アラート通知金額(円)
   customer:
     worker:
       new:

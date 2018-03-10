@@ -1,4 +1,4 @@
-module WorkerValidation
+module WorkerValidator
   extend ActiveSupport::Concern
 
   # もう少しちゃんと考える

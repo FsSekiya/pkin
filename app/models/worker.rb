@@ -5,7 +5,7 @@ class Worker < ApplicationRecord
          :recoverable, :rememberable, :trackable,
          authentication_keys: [:uid], case_insensitive_keys: [:uid]
 
-  include WorkerValidation
+  include WorkerValidator
 
   belongs_to :branch
   has_many :working_records, dependent: :destroy
