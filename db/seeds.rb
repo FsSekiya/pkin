@@ -28,7 +28,7 @@ if ENV['SEED_DATA'] || Rails.env.development?
     send_alert_amount: rand(100) * 100_000
   )
 
-  5.times do
+  100.times do
     Company.create(name: ForgeryJa(:name).company_name,
                    address: ForgeryJa(:address).full_address,
                    zip_code: ForgeryJa(:address).zip.delete('-'),
@@ -36,7 +36,7 @@ if ENV['SEED_DATA'] || Rails.env.development?
                    email: Forgery(:internet).email_address)
   end
 
-  5.times do |i|
+  100.times do |i|
     a = Branch.create(
       name: ForgeryJa(:address).city,
       code: '1234' + i.to_s,
@@ -44,13 +44,16 @@ if ENV['SEED_DATA'] || Rails.env.development?
     )
   end
 
-  Customer.create(
-    name: 'test',
-    email: 'to.be.mr.all.rounder@gmail.com',
-    password: '12341234',
-    password_confirmation: '12341234',
-    company_id: company.id
-  )
+  100.times do |i|
+    Customer.create(
+      name: "test#{i}",
+      email: "to.be.mr.all.rounder+#{i}@gmail.com",
+      password: '12341234',
+      password_confirmation: '12341234',
+      charged_name: '川田さん',
+      company_id: company.id
+    )
+  end
 
   Customer.all.each do |customer|
     20.times do

@@ -2,19 +2,20 @@
   <div class="row">
     <div class="col-8">
       <h1>
-        企業名検索
+        顧客利用ユーザ一覧
       </h1>
+    </div>
+    <div class="col-4">
+      <%= link_to '新規作成', new_admin_customer_path, class: "btn btn-primary" %>
     </div>
   </div>
 </section>
-
 <section class="content">
-
   <%= form_tag admin_customer_index_path, class: "form-row align-items-center mb-2", method: "get" do %>
     <div class="col-12 col-md-4 mb-2">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></div>
-        <input type="text" class="form-control" placeholder="企業名" name="query">
+        <input type="text" class="form-control" placeholder="顧客利用ユーザ" name="query">
       </div>
     </div>
     <div class="col-6 col-md-1 mb-2">
@@ -26,13 +27,19 @@
       <div class="box">
         <table class="table table-hover">
           <tr>
-            <th>企業名</th>
+            <th>顧客利用ユーザ所属企業</th>
+            <th>顧客利用ユーザ名</th>
+            <th>Egate担当</th>
+            <th>代理ログイン</th>
             <th>　</th>
           </tr>
-          <% @companies.each do |company| %>
+          <% @customers.each do |customer| %>
             <tr>
-              <td><%= company.name %></td>
-              <td><%= link_to "この企業のアカウントでログイン", login_customer_admin_customer_path(company.id) %></td>
+              <td><%= customer.company.name %></td>
+              <td><%= customer.name %></td>
+              <td><%= customer.charged_name %></td>
+              <td><%= link_to "このユーザアカウントでログイン", login_customer_admin_customer_path(customer.id) %></td>
+              <td><%= link_to '編集', edit_admin_customer_path(customer.id), class: 'btn btn-success' %></td>
             </tr>
           <% end %>
         </table>

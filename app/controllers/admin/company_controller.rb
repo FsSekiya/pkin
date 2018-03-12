@@ -27,7 +27,15 @@ class Admin::CompanyController < Admin::ApplicationController
     @company = Company.find(params[:id])
   end
 
-  def update; end
+  def update
+    @company = Company.find(params[:id])
+
+    if @company.update(company_params)
+      redirect_to admin_company_index_path, flash: { notice: '変更しました' }
+    else
+      render :edit
+    end
+  end
 
   private
 

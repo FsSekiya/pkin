@@ -95,8 +95,10 @@ ActiveRecord::Schema.define(version: 20_180_223_070_653) do
     t.string 'current_sign_in_ip'
     t.string 'last_sign_in_ip'
     t.bigint 'company_id'
+    t.string 'charged_name'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.index ['charged_name'], name: 'index_customers_on_charged_name'
     t.index ['company_id'], name: 'index_customers_on_company_id'
     t.index ['email'], name: 'index_customers_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_customers_on_reset_password_token', unique: true

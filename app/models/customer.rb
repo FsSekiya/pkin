@@ -6,6 +6,10 @@ class Customer < ApplicationRecord
   validates :email, email: true
   belongs_to :company
 
+  scope :search, lambda { |keyword|
+    where('name like ?', "%#{sanitize_sql_like(keyword)}%")
+  }
+
   has_paper_trail(
     ignore: %i[
       reset_password_token
