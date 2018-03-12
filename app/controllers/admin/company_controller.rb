@@ -23,7 +23,9 @@ class Admin::CompanyController < Admin::ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @company = Company.find(params[:id])
+  end
 
   def update; end
 
