@@ -5,7 +5,7 @@ class Admin::CompanyController < Admin::ApplicationController
     @companies = if params[:query].present?
                    Company.search(params[:query])
                  else
-                   Company.all
+                   Company.all.page(params[:page])
                  end
   end
 

@@ -44,6 +44,14 @@ if ENV['SEED_DATA'] || Rails.env.development?
     )
   end
 
+  10.times do |i|
+    WorkerInformation.create(
+      title: Faker::Lorem.sentence,
+      content: Faker::Lorem.paragraph,
+      published_date: Faker::Time.between(DateTime.now - 4.months, DateTime.now)
+    )
+  end
+
   100.times do |i|
     Customer.create(
       name: "test#{i}",
@@ -94,7 +102,7 @@ if ENV['SEED_DATA'] || Rails.env.development?
     )
   end
   Worker.all.each do |worker|
-    10.times do
+    100.times do
       date = Faker::Time.between(DateTime.now - 4.months, DateTime.now)
       working_time = rand(1..8).hour
       WorkingRecord.create(
@@ -103,12 +111,6 @@ if ENV['SEED_DATA'] || Rails.env.development?
         finish_at: date + working_time,
         hourly_pay: worker.hourly_pay,
         payment: (worker.hourly_pay.to_i * (working_time / 3600.0).round(2)).to_i
-      )
-      WorkerInformation.create(
-        worker_id: worker.id,
-        title: Faker::Lorem.sentence,
-        content: Faker::Lorem.paragraph,
-        published_date: Faker::Time.between(DateTime.now - 4.months, DateTime.now)
       )
     end
   end

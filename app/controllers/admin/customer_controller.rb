@@ -5,7 +5,7 @@ class Admin::CustomerController < Admin::ApplicationController
     @customers = if params[:query].present?
                    Customer.search(params[:query])
                  else
-                   Customer.all.includes(:company)
+                   Customer.all.includes(:company).page(params[:page])
                  end
   end
 
