@@ -12,7 +12,7 @@ class Worker < ApplicationRecord
   has_many :prepayment_applications, dependent: :destroy
   belongs_to :current_working_record, class_name: 'WorkingRecord', optional: true, inverse_of: :worker
 
-  enum bank_kind: { normal: 0, current: 1 }
+  #enum bank_kind: { normal: 0, current: 1 }
 
   delegate :company, to: :branch
 
@@ -40,6 +40,7 @@ class Worker < ApplicationRecord
 
   def finish_work!(finish_at)
     working_record = current_working_record
+
     transaction do
       working_record.finish_at = finish_at
       working_record.calculate_payment
@@ -86,7 +87,7 @@ class Worker < ApplicationRecord
 
   def prepayment_applications_of_iteration(iteration_offset)
     prepayment_applications
-      .where(created_at: company.salary_iteration(iteration_offset))
+	    .where(created_at: Company.new().salary_iteration(iteration_offset))
   end
 
   def working_records_of_iteration(iteration_offset)
